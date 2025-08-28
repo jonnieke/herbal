@@ -53,7 +53,7 @@ export class MemStorage implements IStorage {
         categories: ["Energy", "General Wellness"],
         preparationMethods: ["Fresh tea", "Powder", "Capsules", "Decoction"],
         safetyInfo: "May interact with blood thinners. Consult healthcare provider if pregnant.",
-        imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/Fresh_ginger_root_pieces_b404e3ce.png",
         isIndigenous: "false",
         region: "Global"
       },
@@ -106,7 +106,7 @@ export class MemStorage implements IStorage {
         categories: ["Energy", "General Wellness", "Weight Balance"],
         preparationMethods: ["Powder", "Fresh leaves", "Tea", "Capsules"],
         safetyInfo: "Generally safe. Start with small amounts to assess tolerance.",
-        imageUrl: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/Fresh_moringa_plant_leaves_f8771929.png",
         isIndigenous: "true",
         region: "Africa"
       },
