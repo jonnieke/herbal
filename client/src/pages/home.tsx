@@ -84,7 +84,7 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <section className="relative">
-        <div className="bg-gradient-to-br from-accent/20 to-secondary/30 py-16 px-4">
+        <div className="bg-gradient-to-br from-accent/20 to-secondary/30 py-16 px-4 pl-[16px] pr-[16px] pt-[10px] pb-[10px]">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="order-2 lg:order-1">
