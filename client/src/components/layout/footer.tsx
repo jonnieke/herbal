@@ -4,7 +4,7 @@ import { Leaf } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="bg-card border-t border-border mt-auto">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 py-12 pt-[10px] pb-[10px]">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
