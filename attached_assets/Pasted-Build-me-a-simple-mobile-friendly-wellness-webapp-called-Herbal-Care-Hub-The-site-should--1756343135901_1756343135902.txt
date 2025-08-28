@@ -1,0 +1,74 @@
+Build me a simple, mobile-friendly wellness webapp called **Herbal Care Hub**.  
+
+The site should focus on **health, wellbeing, and vitality**, with gentle guidance on herbs for common ailments.  
+
+### Design Style
+- Clean, calming, nature-inspired design (greens, creams, soft browns).
+- Lots of pictures/icons for herbs and health categories.
+- Big text, simple navigation for non-tech users.
+- Mobile-first layout.
+
+### Pages & Content
+1. **Home**
+   - Banner with tagline: “Feel stronger, calmer, and more alive—naturally.”
+   - Short intro text: “I have given you all these trees for you to eat… At Herbal Care Hub, we help you discover natural ways to boost energy, improve mental health, sleep better, and support wellbeing.”
+   - Tiles for quick navigation: Mental Health, Energy, Sleep, Weight Balance, General Wellness.
+   - Featured herb spotlight (rotate Ginger, Chamomile, Peppermint, Hibiscus, Neem, Moringa).
+   - Embedded YouTube video section (“How to make ginger tea” as placeholder).
+   - Footer: disclaimer “Educational only, not medical advice.”
+
+2. **Herbs Library**
+   - Search bar: “Search herbs by name or condition.”
+   - Grid with images + short descriptions.
+   - Include **Global Herbs**: Peppermint, Ginger, Chamomile, Hibiscus, Turmeric.
+   - Include **Indigenous / Local African Herbs**:
+     - **Moringa (Moringa oleifera)** 🌿 – “The miracle tree, boosts energy, immunity, and nutrition.”
+     - **Neem (Muarubaini – Azadirachta indica)** 🍃 – “Traditionally used for skin, immunity, and blood sugar balance.”
+     - **Aloe vera (Shubiri)** 🌱 – “For digestion, skin healing, and cooling the body.”
+     - **Soursop (Graviola / Mtopeto)** 🍈 – “For vitality, immunity, and digestion support.”
+     - **African Basil (Ocimum gratissimum – Mutaa, Danduu)** 🌿 – “For colds, flu, and mental clarity.”
+     - **Baobab (Adansonia digitata – Mbuyu)** 🌳 – “Rich in vitamin C, supports immunity and energy.”
+     - **African Sage (Lippia javanica – Mshongi)** 🍃 – “Used in steam therapy for coughs, colds, and relaxation.”
+   - Clicking a herb opens a detail page with:
+     - Large picture
+     - Benefits (simple bullet points)
+     - Preparation methods (tea, infusion, decoction, poultice, capsules)
+     - Safety / cautions
+     - Related YouTube video placeholder
+
+3. **Wellbeing**
+   - Sections: Mental Health & Calm, Energy & Vitality, Sleep & Relaxation, Weight & Balance.
+   - Examples:
+     - Mental Health: Chamomile, African Basil, Sage.
+     - Energy: Moringa, Baobab, Ginger.
+     - Sleep: Chamomile, African Sage, Hibiscus.
+     - Weight Balance: Neem, Hibiscus, Moringa.
+   - Each section lists herbs + lifestyle tips in short paragraphs.
+
+4. **Ailments**
+   - Categories: Diabetes, High Blood Pressure, Arthritis, Cancer Support.
+   - Each page shows herbs + simple prep tips + cautions.
+   - Examples:
+     - Diabetes: Neem, Moringa, Hibiscus.
+     - HBP: Hibiscus, Garlic, African Basil.
+     - Arthritis: Ginger, Turmeric, Moringa.
+     - Cancer Support (general wellness, not cure): Soursop, Baobab, Turmeric.
+   - Use positive, simple language (not too clinical).
+
+5. **Videos**
+   - Grid of embedded YouTube videos (placeholders like “How to prepare neem tea”).
+   - Later we’ll replace with original videos.
+
+6. **About**
+   - Mission: “To make herbal knowledge simple, safe, and accessible for everyone.”
+   - Short story: “We believe herbs are a gift for health, balance, and vitality.”
+
+7. **Contact**
+   - Simple form: Name, Email, Message
+   - Placeholder WhatsApp/Telegram link option.
+
+### Technical Notes
+- Use **HTML, CSS, and basic JavaScript** (no heavy frameworks unless needed).
+- Make it responsive (works well on phone & desktop).
+- Include placeholders for pictures of herbs and YouTube videos.
+- Keep code organized and commented so we can expand later.
