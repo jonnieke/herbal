@@ -94,7 +94,7 @@ export default function Home() {
                   <p className="text-lg italic mb-2 text-[#b58700]">
                     "I have given you all these trees for you to eat..."
                   </p>
-                  <p className="text-base">
+                  <p className="text-base text-[#b58700]">
                     At Herbal Care Hub, we help you discover natural ways to boost energy, improve mental health, sleep better, and support wellbeing.
                   </p>
                 </div>
