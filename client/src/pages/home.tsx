@@ -140,7 +140,7 @@ export default function Home() {
         </div>
       </section>
       {/* Featured Herb Spotlight */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 pt-[10px] pb-[10px]">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-2" data-testid="text-featured-herb-title">
             Featured Herb
