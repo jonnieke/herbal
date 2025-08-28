@@ -40,7 +40,7 @@ export class MemStorage implements IStorage {
         categories: ["Mental Health", "Energy", "General Wellness"],
         preparationMethods: ["Tea", "Essential oil", "Fresh leaves", "Capsules"],
         safetyInfo: "Generally safe for most people. Avoid if allergic to mint family plants.",
-        imageUrl: "https://pixabay.com/get/gbd2cdc204f19973d3d50e766f68c5c8c7fa5013bb7d91bca71bdfba004fe9ff0ba5532bfb67688a1ec4324de41714edf50ac818c62addae72c266929d63b6599_1280.jpg",
+        imageUrl: "/attached_assets/generated_images/Fresh_peppermint_leaves_0a300d3e.png",
         isIndigenous: "false",
         region: "Global"
       },
@@ -66,7 +66,7 @@ export class MemStorage implements IStorage {
         categories: ["Mental Health", "Sleep", "General Wellness"],
         preparationMethods: ["Tea", "Tincture", "Capsules", "Poultice"],
         safetyInfo: "Generally safe. May cause allergic reactions in people sensitive to ragweed family.",
-        imageUrl: "https://pixabay.com/get/gdf5d82fa56fa8b00b998de0926ac4733867fb8ca522bc2c27e20c7cd8552ea2e398ddf6f72385bbc3bc2c030f89130e0d62705fff0cbd86d83d005205a81797b_1280.jpg",
+        imageUrl: "/attached_assets/generated_images/Chamomile_flowers_blooming_fcc5a2fb.png",
         isIndigenous: "false",
         region: "Global"
       },
@@ -79,7 +79,7 @@ export class MemStorage implements IStorage {
         categories: ["General Wellness", "Weight Balance"],
         preparationMethods: ["Tea", "Cold brew", "Powder", "Extract"],
         safetyInfo: "May lower blood pressure. Monitor if taking blood pressure medications.",
-        imageUrl: "https://pixabay.com/get/ga5514410a9c72e981f21671c0451a74577dee6b5d056bcc371d72912f3669cbced4e64880a06b5645e90ed103f6b5d2f3102bd5529104c242d5253f6def14c46_1280.jpg",
+        imageUrl: "/attached_assets/generated_images/Red_hibiscus_flowers_47e0eec6.png",
         isIndigenous: "false",
         region: "Global"
       },
@@ -92,7 +92,7 @@ export class MemStorage implements IStorage {
         categories: ["General Wellness", "Energy"],
         preparationMethods: ["Powder", "Fresh root", "Golden milk", "Capsules"],
         safetyInfo: "May interact with blood thinners. Use with black pepper for better absorption.",
-        imageUrl: "https://pixabay.com/get/gd8d6dd52b178a3a7acb48f32ae056a9f7741332acff9a39786c0bbe7298f143390b27e97b0fd9ef6c5b89fd939a0538f380489b3589fce4fae7c25e109a94c08_1280.jpg",
+        imageUrl: "/attached_assets/generated_images/Fresh_turmeric_root_2357d6c4.png",
         isIndigenous: "false",
         region: "Global"
       },
@@ -119,7 +119,7 @@ export class MemStorage implements IStorage {
         categories: ["General Wellness", "Weight Balance"],
         preparationMethods: ["Tea", "Powder", "Paste", "Oil"],
         safetyInfo: "Very bitter. Start with small amounts. Avoid during pregnancy.",
-        imageUrl: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/Neem_tree_leaves_8f8d6bbc.png",
         isIndigenous: "true",
         region: "Africa"
       },
@@ -132,7 +132,7 @@ export class MemStorage implements IStorage {
         categories: ["General Wellness"],
         preparationMethods: ["Fresh gel", "Juice", "Topical application", "Powder"],
         safetyInfo: "Use inner gel only. Avoid latex layer. May have laxative effects.",
-        imageUrl: "https://pixabay.com/get/g616fb01f8eee9683bf3983ced9b30847d79813554c6d7e7aba739e5d0e9b3daa2a21613037e87feb378c5dd181c5e85609b188f3b4b3b37f7d469d39d7188d0a_1280.jpg",
+        imageUrl: "/attached_assets/generated_images/Aloe_vera_plant_gel_c15d2219.png",
         isIndigenous: "true",
         region: "Africa"
       },
@@ -145,7 +145,7 @@ export class MemStorage implements IStorage {
         categories: ["Energy", "General Wellness"],
         preparationMethods: ["Tea", "Fresh fruit", "Powder", "Extract"],
         safetyInfo: "Consume in moderation. May interact with certain medications.",
-        imageUrl: "https://images.unsplash.com/photo-1582793988951-9aed5509eb97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/Soursop_fruit_cut_open_e750000a.png",
         isIndigenous: "true",
         region: "Africa"
       },
@@ -158,7 +158,7 @@ export class MemStorage implements IStorage {
         categories: ["Mental Health", "General Wellness"],
         preparationMethods: ["Tea", "Steam inhalation", "Fresh leaves", "Essential oil"],
         safetyInfo: "Generally safe. Use in moderation during pregnancy.",
-        imageUrl: "https://images.unsplash.com/photo-1618164436241-4473940d1f5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/African_basil_leaves_21f0cb2b.png",
         isIndigenous: "true",
         region: "Africa"
       },
@@ -171,7 +171,7 @@ export class MemStorage implements IStorage {
         categories: ["Energy", "General Wellness"],
         preparationMethods: ["Powder", "Fresh fruit", "Smoothies", "Tea"],
         safetyInfo: "Generally safe. High fiber content may cause digestive upset if consumed in large amounts.",
-        imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/Baobab_fruit_pods_1e748c22.png",
         isIndigenous: "true",
         region: "Africa"
       },
@@ -184,7 +184,7 @@ export class MemStorage implements IStorage {
         categories: ["Mental Health", "Sleep", "General Wellness"],
         preparationMethods: ["Steam inhalation", "Tea", "Dried leaves", "Aromatherapy"],
         safetyInfo: "Generally safe for external use. Use caution with internal consumption.",
-        imageUrl: "https://images.unsplash.com/photo-1618164436241-4473940d1f5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250",
+        imageUrl: "/attached_assets/generated_images/African_sage_plant_11f1d049.png",
         isIndigenous: "true",
         region: "Africa"
       }
