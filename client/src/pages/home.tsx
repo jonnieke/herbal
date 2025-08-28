@@ -91,7 +91,7 @@ export default function Home() {
                   Feel stronger, calmer, and more alive—naturally
                 </h1>
                 <div className="bg-primary/90 text-primary-foreground p-6 rounded-xl mb-6">
-                  <p className="text-lg italic mb-2">
+                  <p className="text-lg italic mb-2 text-[#b58700]">
                     "I have given you all these trees for you to eat..."
                   </p>
                   <p className="text-base">
@@ -118,7 +118,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Quick Navigation Tiles */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-5xl mx-auto">
@@ -139,7 +138,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Featured Herb Spotlight */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
@@ -180,7 +178,6 @@ export default function Home() {
           )}
         </div>
       </section>
-
       {/* Video Section */}
       <section className="py-16 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
