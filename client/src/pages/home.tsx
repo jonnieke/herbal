@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import FeaturedHerb from "@/components/herbs/featured-herb";
 import { Brain, Zap, Moon, Scale, Heart, Search, Play } from "lucide-react";
 import type { Herb } from "@shared/schema";
+import familyImage from "@assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png";
 
 export default function Home() {
   const [featuredHerbIndex, setFeaturedHerbIndex] = useState(0);
@@ -107,7 +108,7 @@ export default function Home() {
               <div className="order-1 lg:order-2">
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1609592909929-bf05f3c0cc9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=500" 
+                    src={familyImage} 
                     alt="Family enjoying herbal tea together"
                     className="rounded-2xl w-full h-80 lg:h-96 object-cover shadow-lg"
                   />
