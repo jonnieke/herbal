@@ -180,7 +180,7 @@ export default function Home() {
         </div>
       </section>
       {/* Video Section */}
-      <section className="py-16 px-4 bg-muted/30">
+      <section className="py-16 px-4 bg-muted/30 pt-[10px] pb-[10px]">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8" data-testid="text-video-title">
             Watch simple herb preparations
