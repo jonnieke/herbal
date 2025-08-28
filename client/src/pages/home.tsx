@@ -83,91 +83,118 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <section className="relative">
-        <div className="bg-gradient-to-br from-primary/20 to-accent/30 py-20 px-4">
-          <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6" data-testid="text-hero-title">
-              Feel stronger, calmer, and more alive—naturally
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8" data-testid="text-hero-description">
-              I have given you all these trees for you to eat… At Herbal Care Hub, we help you discover natural ways to boost energy, improve mental health, sleep better, and support wellbeing.
-            </p>
-            <Link href="/herbs">
-              <Button size="lg" className="text-lg font-semibold" data-testid="button-explore-remedies">
-                Explore Natural Remedies
-              </Button>
-            </Link>
+        <div className="bg-gradient-to-br from-accent/20 to-secondary/30 py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="order-2 lg:order-1">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6" data-testid="text-hero-title">
+                  Feel stronger, calmer, and more alive—naturally
+                </h1>
+                <div className="bg-primary/90 text-primary-foreground p-6 rounded-xl mb-6">
+                  <p className="text-lg italic mb-2">
+                    "I have given you all these trees for you to eat..."
+                  </p>
+                  <p className="text-base">
+                    At Herbal Care Hub, we help you discover natural ways to boost energy, improve mental health, sleep better, and support wellbeing.
+                  </p>
+                </div>
+                <Link href="/herbs">
+                  <Button size="lg" className="text-lg font-semibold px-8 py-3" data-testid="button-explore-herbs">
+                    Explore Herbs
+                  </Button>
+                </Link>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1609592909929-bf05f3c0cc9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=500" 
+                    alt="Family enjoying herbal tea together"
+                    className="rounded-2xl w-full h-80 lg:h-96 object-cover shadow-lg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Quick Navigation Tiles */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" data-testid="text-wellness-journey-title">
-            Choose Your Wellness Journey
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-16 px-4 bg-muted/30">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
             {wellnessCategories.map((category, index) => {
               const IconComponent = category.icon;
               return (
                 <Link key={category.title} href={category.href}>
-                  <Card className="p-6 hover:shadow-xl transition-shadow cursor-pointer h-full" data-testid={`card-category-${category.title.toLowerCase().replace(' ', '-')}`}>
-                    <CardContent className="text-center p-0">
-                      <IconComponent className={`h-12 w-12 ${category.color} mx-auto mb-4`} />
-                      <h3 className="text-xl font-semibold mb-3">{category.title}</h3>
-                      <p className="text-muted-foreground">{category.description}</p>
-                    </CardContent>
-                  </Card>
+                  <div className="bg-card hover:bg-accent/10 transition-all duration-200 rounded-2xl p-6 text-center shadow-sm hover:shadow-md cursor-pointer" data-testid={`card-category-${category.title.toLowerCase().replace(' ', '-')}`}>
+                    <div className="bg-secondary/40 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                      <IconComponent className="h-8 w-8 text-foreground" />
+                    </div>
+                    <h3 className="font-semibold text-sm text-foreground">{category.title}</h3>
+                  </div>
                 </Link>
               );
             })}
-            
-            {/* Browse All Herbs Tile */}
-            <Link href="/herbs">
-              <Card className="bg-gradient-to-br from-primary to-accent text-primary-foreground p-6 hover:shadow-xl transition-shadow cursor-pointer h-full" data-testid="card-browse-all">
-                <CardContent className="text-center p-0">
-                  <Search className="h-12 w-12 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Browse All Herbs</h3>
-                  <p className="opacity-90">Explore our complete herbal library</p>
-                </CardContent>
-              </Card>
-            </Link>
           </div>
         </div>
       </section>
 
       {/* Featured Herb Spotlight */}
-      <section className="py-16 px-4 bg-muted">
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" data-testid="text-featured-herb-title">
-            Featured Herb Spotlight
+          <h2 className="text-2xl font-bold mb-2" data-testid="text-featured-herb-title">
+            Featured Herb
           </h2>
           {currentFeaturedHerb ? (
-            <FeaturedHerb 
-              herb={currentFeaturedHerb}
-              onLearnMore={() => window.location.href = `/herbs#${currentFeaturedHerb.id}`}
-            />
+            <div className="bg-card rounded-2xl p-8 shadow-lg border border-border">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h3 className="text-4xl font-bold mb-4 text-foreground" data-testid="text-featured-herb-name">
+                    {currentFeaturedHerb.name}
+                  </h3>
+                  <p className="text-muted-foreground text-lg mb-6" data-testid="text-featured-herb-description">
+                    {currentFeaturedHerb.description}
+                  </p>
+                  <Button 
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded-xl font-semibold" 
+                    onClick={() => window.location.href = `/herbs#${currentFeaturedHerb.id}`}
+                    data-testid="button-learn-more-featured"
+                  >
+                    Learn More
+                  </Button>
+                </div>
+                <div className="flex justify-center">
+                  <img 
+                    src={currentFeaturedHerb.imageUrl || "https://via.placeholder.com/400x300?text=Featured+Herb"} 
+                    alt={currentFeaturedHerb.name}
+                    className="rounded-2xl w-full max-w-sm h-64 object-cover shadow-md"
+                  />
+                </div>
+              </div>
+            </div>
           ) : (
-            <div className="bg-card rounded-xl p-8 shadow-lg border border-border text-center">
+            <div className="bg-card rounded-2xl p-8 shadow-lg border border-border text-center">
               <p className="text-muted-foreground">Loading featured herb...</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* YouTube Video Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12" data-testid="text-video-title">
-            Learn How to Prepare
+      {/* Video Section */}
+      <section className="py-16 px-4 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8" data-testid="text-video-title">
+            Watch simple herb preparations
           </h2>
-          <div className="bg-card rounded-xl p-8 shadow-lg border border-border">
-            <h3 className="text-xl font-semibold mb-6 text-center">How to Make Ginger Tea</h3>
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center" data-testid="video-placeholder-ginger-tea">
+          <div className="bg-card rounded-2xl p-8 shadow-lg border border-border">
+            <div className="aspect-video bg-gradient-to-br from-muted to-secondary/20 rounded-xl flex items-center justify-center" data-testid="video-placeholder-ginger-tea">
               <div className="text-center">
-                <Play className="h-16 w-16 text-primary mx-auto mb-4" />
-                <p className="text-muted-foreground mb-2">Video placeholder - "How to make ginger tea"</p>
-                <p className="text-sm text-muted-foreground">Coming soon: Step-by-step herbal preparation guides</p>
+                <div className="bg-primary/90 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                  <Play className="h-10 w-10 text-primary-foreground" />
+                </div>
+                <p className="text-foreground text-lg font-semibold mb-2">Coming Soon</p>
+                <p className="text-muted-foreground">Step-by-step herbal preparation guides</p>
               </div>
             </div>
           </div>

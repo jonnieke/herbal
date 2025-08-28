@@ -192,7 +192,16 @@ export class MemStorage implements IStorage {
 
     initialHerbs.forEach(herb => {
       const id = randomUUID();
-      const herbWithId: Herb = { ...herb, id };
+      const herbWithId: Herb = { 
+        ...herb, 
+        id,
+        localName: herb.localName || null,
+        emoji: herb.emoji || null,
+        safetyInfo: herb.safetyInfo || null,
+        imageUrl: herb.imageUrl || null,
+        region: herb.region || null,
+        isIndigenous: herb.isIndigenous || "false"
+      };
       this.herbs.set(id, herbWithId);
     });
   }
@@ -241,7 +250,16 @@ export class MemStorage implements IStorage {
 
   async createHerb(insertHerb: InsertHerb): Promise<Herb> {
     const id = randomUUID();
-    const herb: Herb = { ...insertHerb, id };
+    const herb: Herb = { 
+      ...insertHerb, 
+      id,
+      localName: insertHerb.localName || null,
+      emoji: insertHerb.emoji || null,
+      safetyInfo: insertHerb.safetyInfo || null,
+      imageUrl: insertHerb.imageUrl || null,
+      region: insertHerb.region || null,
+      isIndigenous: insertHerb.isIndigenous || "false"
+    };
     this.herbs.set(id, herb);
     return herb;
   }
@@ -251,6 +269,7 @@ export class MemStorage implements IStorage {
     const message: ContactMessage = { 
       ...insertMessage, 
       id, 
+      subject: insertMessage.subject || null,
       createdAt: new Date().toISOString() 
     };
     this.contactMessages.set(id, message);
