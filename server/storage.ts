@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type Herb, type InsertHerb, type ContactMessage, type InsertContactMessage, type CommunityPost, type InsertCommunityPost, type CommunityComment, type InsertCommunityComment, type CommunityLike, type InsertCommunityLike } from "@shared/schema";
+import { type User, type InsertUser, type Herb, type InsertHerb, type ContactMessage, type InsertContactMessage, type CommunityPost, type InsertCommunityPost, type CommunityComment, type InsertCommunityComment, type CommunityLike, type InsertCommunityLike } from "../shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {

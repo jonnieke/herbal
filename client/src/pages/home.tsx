@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Textarea } from "@/components/ui/textarea";
 import FeaturedHerb from "@/components/herbs/featured-herb";
 import { Brain, Zap, Moon, Scale, Heart, Search, Play, Bot, Send, X, Sparkles } from "lucide-react";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 const familyImage = "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png";
 
 interface ChatMessage {

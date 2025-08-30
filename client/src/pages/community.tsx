@@ -22,7 +22,7 @@ import {
   User,
   ThumbsUp
 } from "lucide-react";
-import type { CommunityPost, CommunityComment } from "@shared/schema";
+import type { CommunityPost, CommunityComment } from "../../shared/schema";
 
 interface CreatePostForm {
   authorName: string;

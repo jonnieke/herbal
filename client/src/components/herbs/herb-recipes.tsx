@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Users, Star } from "lucide-react";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 
 interface HerbRecipesProps {
   herb: Herb;

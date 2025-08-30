@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, Clock, Thermometer } from "lucide-react";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 import HerbRecipes from "./herb-recipes";
 import SourcingGuide from "./sourcing-guide";
 import WellnessTracker from "./wellness-tracker";

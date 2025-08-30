@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 
 interface FeaturedHerbProps {
   herb: Herb;

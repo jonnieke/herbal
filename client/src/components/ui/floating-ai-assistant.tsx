@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Bot, Send, MessageCircle, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 
 interface ChatMessage {
   id: string;

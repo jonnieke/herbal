@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { MessageCircle, Clock, Heart } from "lucide-react";
-import type { InsertContactMessage } from "@shared/schema";
+import type { InsertContactMessage } from "../../shared/schema";
 
 export default function Contact() {
   const { toast } = useToast();

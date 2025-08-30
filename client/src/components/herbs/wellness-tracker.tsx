@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar, Plus, CheckCircle, Clock, TrendingUp, Trash2 } from "lucide-react";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 
 interface WellnessTrackerProps {
   herb: Herb;

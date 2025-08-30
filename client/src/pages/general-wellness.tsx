@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, Heart, Brain, Leaf, Activity, Sun, Moon, Users, Globe, TrendingUp, AlertTriangle, Info, Lightbulb, BookOpen } from "lucide-react";
 import HerbCard from "@/components/herbs/herb-card";
 import HerbDetailModal from "@/components/herbs/herb-detail-modal";
-import type { Herb } from "@shared/schema";
+import type { Herb } from "../../shared/schema";
 
 export default function GeneralWellness() {
   const [selectedHerb, setSelectedHerb] = useState<Herb | null>(null);
