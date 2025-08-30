@@ -29,7 +29,7 @@ export default function FeaturedHerb({ herb, onLearnMore }: FeaturedHerbProps) {
             {herb.description}
           </p>
           <div className="space-y-3">
-            {herb.benefits.slice(0, 3).map((benefit, index) => (
+            {herb.benefits.slice(0, 3).map((benefit: string, index: number) => (
               <div key={index} className="flex items-center space-x-3">
                 <Check className="h-5 w-5 text-primary" />
                 <span>{benefit}</span>

@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Check, AlertTriangle, ShoppingBag, Clock, Thermometer, Leaf } from "lucide-react";
+import { Check, Clock, Thermometer } from "lucide-react";
 import type { Herb } from "@shared/schema";
 import HerbRecipes from "./herb-recipes";
 import SourcingGuide from "./sourcing-guide";
@@ -172,7 +170,7 @@ export default function HerbDetailModal({ herb, isOpen, onClose }: HerbDetailMod
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Benefits</h3>
                   <div className="space-y-2">
-                    {herb.benefits.map((benefit, index) => (
+                    {herb.benefits.map((benefit: string, index: number) => (
                       <div key={index} className="flex items-center gap-2">
                         <Check className="h-4 w-4 text-primary" />
                         <span className="text-sm">{benefit}</span>
@@ -194,7 +192,8 @@ export default function HerbDetailModal({ herb, isOpen, onClose }: HerbDetailMod
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {herb.preparationMethods.map((method) => {
+
+              {herb.preparationMethods.map((method: string) => {
                 const guide = preparationGuides[method as keyof typeof preparationGuides];
                 return (
                   <Card key={method} className="p-4">

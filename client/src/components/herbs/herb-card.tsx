@@ -37,7 +37,7 @@ export default function HerbCard({ herb, onClick }: HerbCardProps) {
           {herb.description}
         </p>
         <div className="flex flex-wrap gap-1">
-          {herb.categories.slice(0, 3).map((category) => (
+          {herb.categories.slice(0, 3).map((category: string) => (
             <Badge key={category} variant="outline" className="text-xs">
               {category}
             </Badge>
