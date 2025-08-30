@@ -19,6 +19,8 @@ import Videos from "@/pages/videos";
 import Community from "@/pages/community";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import SafetyGuidelines from "@/pages/safety-guidelines";
+import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -40,6 +42,8 @@ function Router() {
           <Route path="/community" component={Community} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
+          <Route path="/safety-guidelines" component={SafetyGuidelines} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route component={NotFound} />
         </Switch>
       </main>

@@ -97,8 +97,24 @@ export default function Footer() {
                   Contact
                 </button>
               </li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Safety Guidelines</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/safety-guidelines")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-safety-guidelines"
+                >
+                  Safety Guidelines
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/privacy-policy")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-privacy-policy"
+                >
+                  Privacy Policy
+                </button>
+              </li>
             </ul>
           </div>
         </div>
