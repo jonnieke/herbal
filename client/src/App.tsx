@@ -5,11 +5,18 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
+import FloatingAIAssistant from "@/components/ui/floating-ai-assistant";
 import Home from "@/pages/home";
 import Herbs from "@/pages/herbs";
 import Wellbeing from "@/pages/wellbeing";
+import MentalHealth from "@/pages/mental-health";
+import Energy from "@/pages/energy";
+import Sleep from "@/pages/sleep";
+import WeightBalance from "@/pages/weight-balance";
+import GeneralWellness from "@/pages/general-wellness";
 import Ailments from "@/pages/ailments";
 import Videos from "@/pages/videos";
+import Community from "@/pages/community";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
@@ -23,14 +30,21 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/herbs" component={Herbs} />
           <Route path="/wellbeing" component={Wellbeing} />
+          <Route path="/mental-health" component={MentalHealth} />
+          <Route path="/energy" component={Energy} />
+          <Route path="/sleep" component={Sleep} />
+          <Route path="/weight-balance" component={WeightBalance} />
+          <Route path="/general-wellness" component={GeneralWellness} />
           <Route path="/ailments" component={Ailments} />
           <Route path="/videos" component={Videos} />
+          <Route path="/community" component={Community} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route component={NotFound} />
         </Switch>
       </main>
       <Footer />
+      <FloatingAIAssistant />
     </div>
   );
 }

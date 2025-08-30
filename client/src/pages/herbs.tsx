@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import HerbCard from "@/components/herbs/herb-card";
 import HerbSearch from "@/components/herbs/herb-search";
+import HerbDetailModal from "@/components/herbs/herb-detail-modal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Herb } from "@shared/schema";
@@ -9,13 +10,22 @@ import type { Herb } from "@shared/schema";
 export default function Herbs() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedHerb, setSelectedHerb] = useState<Herb | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: allHerbs = [], isLoading } = useQuery<Herb[]>({
     queryKey: ["/api/herbs"],
   });
 
   const { data: searchResults = [], isLoading: isSearching } = useQuery<Herb[]>({
-    queryKey: ["/api/herbs/search", { q: searchQuery }],
+    queryKey: ["/api/herbs/search", searchQuery],
+    queryFn: async () => {
+      const response = await fetch(`/api/herbs/search?q=${encodeURIComponent(searchQuery)}`);
+      if (!response.ok) {
+        throw new Error('Failed to search herbs');
+      }
+      return response.json();
+    },
     enabled: searchQuery.length >= 2,
   });
 
@@ -29,8 +39,8 @@ export default function Herbs() {
   ).sort();
 
   const handleHerbClick = (herb: Herb) => {
-    // TODO: Implement herb detail modal or navigation
-    console.log("Opening details for:", herb.name);
+    setSelectedHerb(herb);
+    setIsModalOpen(true);
   };
 
   if (isLoading) {
@@ -174,6 +184,16 @@ export default function Herbs() {
           )
         )}
       </div>
+
+      {/* Herb Detail Modal */}
+      <HerbDetailModal
+        herb={selectedHerb}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedHerb(null);
+        }}
+      />
     </div>
   );
 }

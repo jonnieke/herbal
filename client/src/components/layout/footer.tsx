@@ -1,7 +1,13 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Leaf } from "lucide-react";
 
 export default function Footer() {
+  const [location, setLocation] = useLocation();
+
+  const handleNavigation = (path: string) => {
+    setLocation(path);
+  };
+
   return (
     <footer className="bg-card border-t border-border mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-12 pt-[10px] pb-[10px]">
@@ -22,18 +28,75 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/herbs" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-herbs">Herbs Library</Link></li>
-              <li><Link href="/wellbeing" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-wellbeing">Wellbeing</Link></li>
-              <li><Link href="/ailments" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-ailments">Ailments</Link></li>
-              <li><Link href="/videos" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-videos">Videos</Link></li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/herbs")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-herbs"
+                >
+                  Herbs Library
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/wellbeing")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-wellbeing"
+                >
+                  Wellbeing
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/ailments")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-ailments"
+                >
+                  Ailments
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/videos")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-videos"
+                >
+                  Videos
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/community")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-community"
+                >
+                  Community
+                </button>
+              </li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-semibold mb-4">Resources</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-about">About Us</Link></li>
-              <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors" data-testid="footer-link-contact">Contact</Link></li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/about")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-about"
+                >
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation("/contact")} 
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-contact"
+                >
+                  Contact
+                </button>
+              </li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Safety Guidelines</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
             </ul>

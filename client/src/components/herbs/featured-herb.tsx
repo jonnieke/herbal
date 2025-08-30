@@ -13,7 +13,7 @@ export default function FeaturedHerb({ herb, onLearnMore }: FeaturedHerbProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div>
           <img 
-            src={herb.imageUrl || "https://via.placeholder.com/500x400?text=Featured+Herb"} 
+            src={herb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png"} 
             alt={herb.name}
             className="rounded-lg w-full h-64 object-cover"
           />

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema } from "@shared/schema";
+import { insertContactMessageSchema, insertCommunityPostSchema, insertCommunityCommentSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -68,6 +68,122 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       res.status(500).json({ message: "Failed to submit contact form" });
+    }
+  });
+
+  // Community routes
+  // Get all community posts
+  app.get("/api/community/posts", async (req, res) => {
+    try {
+      const posts = await storage.getAllCommunityPosts();
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch community posts" });
+    }
+  });
+
+  // Get single community post
+  app.get("/api/community/posts/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const post = await storage.getCommunityPost(id);
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch post" });
+    }
+  });
+
+  // Create community post
+  app.post("/api/community/posts", async (req, res) => {
+    try {
+      const validatedData = insertCommunityPostSchema.parse(req.body);
+      const post = await storage.createCommunityPost(validatedData);
+      res.status(201).json(post);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid post data", 
+          errors: error.errors 
+        });
+      }
+      res.status(500).json({ message: "Failed to create post" });
+    }
+  });
+
+  // Get comments for a post
+  app.get("/api/community/posts/:id/comments", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const comments = await storage.getCommentsByPostId(id);
+      res.json(comments);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch comments" });
+    }
+  });
+
+  // Create comment
+  app.post("/api/community/comments", async (req, res) => {
+    try {
+      const validatedData = insertCommunityCommentSchema.parse(req.body);
+      const comment = await storage.createCommunityComment(validatedData);
+      res.status(201).json(comment);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Invalid comment data", 
+          errors: error.errors 
+        });
+      }
+      res.status(500).json({ message: "Failed to create comment" });
+    }
+  });
+
+  // Like/unlike post
+  app.post("/api/community/posts/:id/like", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userEmail } = req.body;
+      
+      if (!userEmail) {
+        return res.status(400).json({ message: "User email is required" });
+      }
+
+      const hasLiked = await storage.hasUserLikedPost(id, userEmail);
+      if (hasLiked) {
+        await storage.unlikePost(id, userEmail);
+        res.json({ liked: false });
+      } else {
+        await storage.likePost(id, userEmail);
+        res.json({ liked: true });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update like" });
+    }
+  });
+
+  // Like/unlike comment
+  app.post("/api/community/comments/:id/like", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userEmail } = req.body;
+      
+      if (!userEmail) {
+        return res.status(400).json({ message: "User email is required" });
+      }
+
+      const hasLiked = await storage.hasUserLikedComment(id, userEmail);
+      if (hasLiked) {
+        await storage.unlikeComment(id, userEmail);
+        res.json({ liked: false });
+      } else {
+        await storage.likeComment(id, userEmail);
+        res.json({ liked: true });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update like" });
     }
   });
 

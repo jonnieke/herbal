@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbal Care Hub - Natural Wellness Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                }
+            }
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background: hsl(80 20% 97%);
+            --foreground: hsl(120 20% 15%);
+            --card: hsl(0 0% 100%);
+            --card-foreground: hsl(120 20% 15%);
+            --primary: hsl(140 30% 45%);
+            --primary-foreground: hsl(0 0% 98%);
+            --secondary: hsl(30 25% 85%);
+            --secondary-foreground: hsl(120 20% 15%);
+            --muted: hsl(80 15% 92%);
+            --muted-foreground: hsl(120 15% 40%);
+            --accent: hsl(35 40% 75%);
+            --accent-foreground: hsl(120 20% 15%);
+            --border: hsl(80 25% 85%);
+            --input: hsl(0 0% 100%);
+            --ring: hsl(140 30% 45%);
+            --radius: 0.75rem;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+        
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        .herb-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .herb-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground">
+
+    <!-- @COMPONENT: Navigation -->
+    <nav class="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-leaf text-primary text-2xl"></i>
+                    <span class="text-xl font-bold text-primary">Herbal Care Hub</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link active font-medium" data-page="home">Home</a>
+                    <a href="#" class="nav-link font-medium" data-page="herbs">Herbs Library</a>
+                    <a href="#" class="nav-link font-medium" data-page="wellbeing">Wellbeing</a>
+                    <a href="#" class="nav-link font-medium" data-page="ailments">Ailments</a>
+                    <a href="#" class="nav-link font-medium" data-page="videos">Videos</a>
+                    <a href="#" class="nav-link font-medium" data-page="about">About</a>
+                    <a href="#" class="nav-link font-medium" data-page="contact">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 bg-card border-t border-border">
+                    <a href="#" class="nav-link block px-3 py-2" data-page="home">Home</a>
+                    <a href="#" class="nav-link block px-3 py-2" data-page="herbs">Herbs Library</a>
+                    <a href="#" class="nav-link block px-3 py-2" data-page="wellbeing">Wellbeing</a>
+                    <a href="#" class="nav-link block px-3 py-2" data-page="ailments">Ailments</a>
+                    <a href="#" class="nav-link block px-3 py-2" data-page="videos">Videos</a>
+                    <a href="#" class="nav-link block px-3 py-2" data-page="about">About</a>
+                    <a href="#" class="nav-link block px-3 py-2" data-page="contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- @COMPONENT: HomePage -->
+    <main class="page-section active" id="home-page">
+        <!-- Hero Section -->
+        <section class="relative">
+            <!-- Hero background with herbal imagery -->
+            <div class="bg-gradient-to-br from-primary/20 to-accent/30 py-20 px-4">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold text-foreground mb-6">
+                        Feel stronger, calmer, and more alive—naturally
+                    </h1>
+                    <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+                        I have given you all these trees for you to eat… At Herbal Care Hub, we help you discover natural ways to boost energy, improve mental health, sleep better, and support wellbeing.
+                    </p>
+                    <button class="bg-primary text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors">
+                        Explore Natural Remedies
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Navigation Tiles -->
+        <section class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12">Choose Your Wellness Journey</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Mental Health Tile -->
+                    <div class="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border border-border">
+                        <div class="text-center">
+                            <i class="fas fa-brain text-4xl text-primary mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-3">Mental Health</h3>
+                            <p class="text-muted-foreground">Find calm and clarity with natural herbs</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Energy Tile -->
+                    <div class="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border border-border">
+                        <div class="text-center">
+                            <i class="fas fa-bolt text-4xl text-accent mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-3">Energy</h3>
+                            <p class="text-muted-foreground">Boost vitality and stamina naturally</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Sleep Tile -->
+                    <div class="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border border-border">
+                        <div class="text-center">
+                            <i class="fas fa-moon text-4xl text-secondary mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-3">Sleep</h3>
+                            <p class="text-muted-foreground">Rest better with soothing herbs</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Weight Balance Tile -->
+                    <div class="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border border-border">
+                        <div class="text-center">
+                            <i class="fas fa-balance-scale text-4xl text-primary mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-3">Weight Balance</h3>
+                            <p class="text-muted-foreground">Support healthy weight management</p>
+                        </div>
+                    </div>
+                    
+                    <!-- General Wellness Tile -->
+                    <div class="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border border-border">
+                        <div class="text-center">
+                            <i class="fas fa-heart text-4xl text-accent mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-3">General Wellness</h3>
+                            <p class="text-muted-foreground">Overall health and vitality support</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Browse All -->
+                    <div class="bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <div class="text-center">
+                            <i class="fas fa-search text-4xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-3">Browse All Herbs</h3>
+                            <p class="opacity-90">Explore our complete herbal library</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Herb Spotlight -->
+        <section class="py-16 px-4 bg-muted">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12">Featured Herb Spotlight</h2>
+                <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <!-- Fresh ginger root with green leaves on wooden background -->
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=500" alt="Fresh ginger root" class="rounded-lg w-full h-64 object-cover" />
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4 text-primary">Ginger</h3>
+                            <p class="text-lg text-muted-foreground mb-6">
+                                Known as nature's anti-inflammatory powerhouse, ginger has been used for centuries to aid digestion, reduce nausea, and boost immunity. Perfect for daily wellness routines.
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                    <span>Aids digestion and reduces nausea</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                    <span>Natural anti-inflammatory properties</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-check-circle text-primary"></i>
+                                    <span>Boosts immune system function</span>
+                                </div>
+                            </div>
+                            <button class="mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- YouTube Video Section -->
+        <section class="py-16 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12">Learn How to Prepare</h2>
+                <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                    <h3 class="text-xl font-semibold mb-6 text-center">How to Make Ginger Tea</h3>
+                    <div class="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-play-circle text-6xl text-primary mb-4"></i>
+                            <p class="text-muted-foreground">Video placeholder - "How to make ginger tea"</p>
+                            <p class="text-sm text-muted-foreground mt-2">Coming soon: Step-by-step herbal preparation guides</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- @END_COMPONENT: HomePage -->
+
+    <!-- @COMPONENT: HerbsLibrary -->
+    <main class="page-section" id="herbs-page">
+        <div class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-4xl font-bold text-center mb-8">Herbs Library</h1>
+                <p class="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                    Discover nature's pharmacy with our comprehensive collection of healing herbs from around the world.
+                </p>
+
+                <!-- Search Bar -->
+                <div class="max-w-md mx-auto mb-12">
+                    <div class="relative">
+                        <input type="text" placeholder="Search herbs by name or condition..." 
+                               class="w-full px-4 py-3 pl-12 rounded-lg border border-border bg-input focus:ring-2 focus:ring-ring focus:border-transparent">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground"></i>
+                    </div>
+                </div>
+
+                <!-- Herb Categories -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6">Global Herbs</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Peppermint -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Fresh peppermint leaves in natural lighting -->
+                            <img src="https://pixabay.com/get/gbd2cdc204f19973d3d50e766f68c5c8c7fa5013bb7d91bca71bdfba004fe9ff0ba5532bfb67688a1ec4324de41714edf50ac818c62addae72c266929d63b6599_1280.jpg" alt="Fresh peppermint leaves" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Peppermint</h3>
+                                <p class="text-muted-foreground">Refreshing herb for digestion, headaches, and mental clarity. Perfect for teas and aromatherapy.</p>
+                            </div>
+                        </div>
+
+                        <!-- Ginger -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Fresh ginger root with green leaves -->
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250" alt="Fresh ginger root" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Ginger</h3>
+                                <p class="text-muted-foreground">Powerful anti-inflammatory root for nausea, digestion, and immune support.</p>
+                            </div>
+                        </div>
+
+                        <!-- Chamomile -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Dried chamomile flowers in wooden spoon -->
+                            <img src="https://pixabay.com/get/gdf5d82fa56fa8b00b998de0926ac4733867fb8ca522bc2c27e20c7cd8552ea2e398ddf6f72385bbc3bc2c030f89130e0d62705fff0cbd86d83d005205a81797b_1280.jpg" alt="Chamomile flowers" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Chamomile</h3>
+                                <p class="text-muted-foreground">Gentle, calming herb for sleep, anxiety, and digestive comfort.</p>
+                            </div>
+                        </div>
+
+                        <!-- Hibiscus -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Dried red hibiscus petals in bowl -->
+                            <img src="https://pixabay.com/get/ga5514410a9c72e981f21671c0451a74577dee6b5d056bcc371d72912f3669cbced4e64880a06b5645e90ed103f6b5d2f3102bd5529104c242d5253f6def14c46_1280.jpg" alt="Hibiscus petals" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Hibiscus</h3>
+                                <p class="text-muted-foreground">Tart, vitamin C-rich flower for blood pressure support and heart health.</p>
+                            </div>
+                        </div>
+
+                        <!-- Turmeric -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Fresh turmeric root and powder -->
+                            <img src="https://pixabay.com/get/gd8d6dd52b178a3a7acb48f32ae056a9f7741332acff9a39786c0bbe7298f143390b27e97b0fd9ef6c5b89fd939a0538f380489b3589fce4fae7c25e109a94c08_1280.jpg" alt="Turmeric root and powder" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Turmeric</h3>
+                                <p class="text-muted-foreground">Golden spice with powerful anti-inflammatory and antioxidant properties.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indigenous African Herbs -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-6">Indigenous African Herbs</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Moringa -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Moringa leaves on branch with blue sky background -->
+                            <img src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250" alt="Moringa leaves" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Moringa 🌿</h3>
+                                <p class="text-muted-foreground">The miracle tree, boosts energy, immunity, and nutrition with incredible nutrient density.</p>
+                            </div>
+                        </div>
+
+                        <!-- Neem -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Neem tree with green leaves in natural setting -->
+                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250" alt="Neem tree leaves" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Neem (Muarubaini) 🍃</h3>
+                                <p class="text-muted-foreground">Traditionally used for skin health, immunity, and blood sugar balance support.</p>
+                            </div>
+                        </div>
+
+                        <!-- Aloe Vera -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Aloe vera plant with thick succulent leaves -->
+                            <img src="https://pixabay.com/get/g616fb01f8eee9683bf3983ced9b30847d79813554c6d7e7aba739e5d0e9b3daa2a21613037e87feb378c5dd181c5e85609b188f3b4b3b37f7d469d39d7188d0a_1280.jpg" alt="Aloe vera plant" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Aloe Vera (Shubiri) 🌱</h3>
+                                <p class="text-muted-foreground">For digestion, skin healing, and cooling the body naturally.</p>
+                            </div>
+                        </div>
+
+                        <!-- Soursop -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Soursop fruit on tree with green leaves -->
+                            <img src="https://images.unsplash.com/photo-1582793988951-9aed5509eb97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250" alt="Soursop fruit" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Soursop (Mtopeto) 🍈</h3>
+                                <p class="text-muted-foreground">For vitality, immunity, and digestive support with rich antioxidants.</p>
+                            </div>
+                        </div>
+
+                        <!-- African Basil -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Green basil leaves in sunlight -->
+                            <img src="https://images.unsplash.com/photo-1618164436241-4473940d1f5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250" alt="African basil leaves" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">African Basil (Mutaa) 🌿</h3>
+                                <p class="text-muted-foreground">For colds, flu, and mental clarity with aromatic healing properties.</p>
+                            </div>
+                        </div>
+
+                        <!-- Baobab -->
+                        <div class="herb-card bg-card rounded-lg shadow-lg border border-border overflow-hidden cursor-pointer">
+                            <!-- Majestic baobab tree against sunset sky -->
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250" alt="Baobab tree" class="w-full h-48 object-cover" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">Baobab (Mbuyu) 🌳</h3>
+                                <p class="text-muted-foreground">Rich in vitamin C, supports immunity and energy with superfruit benefits.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- @END_COMPONENT: HerbsLibrary -->
+
+    <!-- @COMPONENT: WellbeingPage -->
+    <main class="page-section" id="wellbeing-page">
+        <div class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-4xl font-bold text-center mb-8">Wellbeing Categories</h1>
+                <p class="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                    Explore natural solutions organized by your wellness goals and needs.
+                </p>
+
+                <!-- Mental Health & Calm -->
+                <section class="mb-16">
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h2 class="text-3xl font-bold mb-4 text-primary flex items-center">
+                                    <i class="fas fa-brain mr-3"></i>
+                                    Mental Health & Calm
+                                </h2>
+                                <p class="text-muted-foreground mb-6">
+                                    Find peace and mental clarity with these calming herbs that have been used for centuries to reduce stress and promote emotional balance.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Chamomile</span>
+                                        <span class="text-sm text-muted-foreground">- Gentle relaxation and sleep support</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">African Basil</span>
+                                        <span class="text-sm text-muted-foreground">- Mental clarity and stress relief</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">African Sage</span>
+                                        <span class="text-sm text-muted-foreground">- Calming aromatherapy benefits</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 p-4 bg-muted rounded-lg">
+                                    <h4 class="font-semibold mb-2">Lifestyle Tips:</h4>
+                                    <p class="text-sm text-muted-foreground">Practice deep breathing, maintain a regular sleep schedule, and create calming bedtime rituals with herbal teas.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- Person meditating in peaceful natural setting -->
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400" alt="Person meditating peacefully" class="rounded-lg w-full h-64 object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Energy & Vitality -->
+                <section class="mb-16">
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <!-- Person doing yoga at sunrise -->
+                                <img src="https://images.unsplash.com/photo-1529693662653-9d480530a697?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400" alt="Person doing yoga at sunrise" class="rounded-lg w-full h-64 object-cover" />
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold mb-4 text-accent flex items-center">
+                                    <i class="fas fa-bolt mr-3"></i>
+                                    Energy & Vitality
+                                </h2>
+                                <p class="text-muted-foreground mb-6">
+                                    Boost your natural energy levels and stamina with these powerful herbs that support sustained vitality throughout the day.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Moringa</span>
+                                        <span class="text-sm text-muted-foreground">- Complete nutrition and energy boost</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Baobab</span>
+                                        <span class="text-sm text-muted-foreground">- Vitamin C powerhouse for immunity</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm font-medium">Ginger</span>
+                                        <span class="text-sm text-muted-foreground">- Circulation and digestive energy</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 p-4 bg-muted rounded-lg">
+                                    <h4 class="font-semibold mb-2">Lifestyle Tips:</h4>
+                                    <p class="text-sm text-muted-foreground">Stay hydrated, eat nutrient-dense foods, get morning sunlight, and maintain regular exercise for sustained energy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sleep & Relaxation -->
+                <section class="mb-16">
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h2 class="text-3xl font-bold mb-4 text-secondary flex items-center">
+                                    <i class="fas fa-moon mr-3"></i>
+                                    Sleep & Relaxation
+                                </h2>
+                                <p class="text-muted-foreground mb-6">
+                                    Improve your sleep quality and relaxation with these gentle, soothing herbs that help calm the mind and prepare the body for rest.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">Chamomile</span>
+                                        <span class="text-sm text-muted-foreground">- Classic bedtime tea for peaceful sleep</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">African Sage</span>
+                                        <span class="text-sm text-muted-foreground">- Aromatic relaxation therapy</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-medium">Hibiscus</span>
+                                        <span class="text-sm text-muted-foreground">- Evening wind-down ritual</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 p-4 bg-muted rounded-lg">
+                                    <h4 class="font-semibold mb-2">Lifestyle Tips:</h4>
+                                    <p class="text-sm text-muted-foreground">Create a consistent bedtime routine, limit screen time before sleep, and keep your bedroom cool and dark.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- Peaceful bedroom setup with herbal tea -->
+                                <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400" alt="Peaceful sleep environment" class="rounded-lg w-full h-64 object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Weight & Balance -->
+                <section>
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <!-- Healthy meal with colorful vegetables and herbs -->
+                                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400" alt="Healthy colorful meal" class="rounded-lg w-full h-64 object-cover" />
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-bold mb-4 text-primary flex items-center">
+                                    <i class="fas fa-balance-scale mr-3"></i>
+                                    Weight & Balance
+                                </h2>
+                                <p class="text-muted-foreground mb-6">
+                                    Support healthy weight management and metabolic balance with these herbs that assist digestion, metabolism, and overall wellness.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Neem</span>
+                                        <span class="text-sm text-muted-foreground">- Blood sugar balance support</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Hibiscus</span>
+                                        <span class="text-sm text-muted-foreground">- Metabolism and hydration support</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Moringa</span>
+                                        <span class="text-sm text-muted-foreground">- Nutrient density for healthy meals</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6 p-4 bg-muted rounded-lg">
+                                    <h4 class="font-semibold mb-2">Lifestyle Tips:</h4>
+                                    <p class="text-sm text-muted-foreground">Focus on whole foods, regular meals, portion control, and combining herbs with balanced nutrition and physical activity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <!-- @END_COMPONENT: WellbeingPage -->
+
+    <!-- @COMPONENT: AilmentsPage -->
+    <main class="page-section" id="ailments-page">
+        <div class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-4xl font-bold text-center mb-8">Common Ailments</h1>
+                <p class="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                    Natural herbal support for common health concerns. Always consult healthcare providers for serious conditions.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Diabetes Support -->
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h2 class="text-2xl font-bold mb-4 text-primary flex items-center">
+                            <i class="fas fa-tint mr-3"></i>
+                            Diabetes Support
+                        </h2>
+                        <p class="text-muted-foreground mb-6">
+                            These herbs may help support healthy blood sugar levels as part of a comprehensive diabetes management plan.
+                        </p>
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-primary">Neem (Muarubaini)</h4>
+                                <p class="text-sm text-muted-foreground">Traditional support for blood sugar balance. Use as tea or powder.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-primary">Moringa</h4>
+                                <p class="text-sm text-muted-foreground">Nutrient-dense leaves that may help with glucose management.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-primary">Hibiscus</h4>
+                                <p class="text-sm text-muted-foreground">Antioxidant-rich flower that supports overall metabolic health.</p>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                            <p class="text-sm text-yellow-800"><strong>Important:</strong> Monitor blood sugar levels and consult your healthcare provider before using herbs alongside diabetes medications.</p>
+                        </div>
+                    </div>
+
+                    <!-- High Blood Pressure -->
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h2 class="text-2xl font-bold mb-4 text-accent flex items-center">
+                            <i class="fas fa-heartbeat mr-3"></i>
+                            High Blood Pressure
+                        </h2>
+                        <p class="text-muted-foreground mb-6">
+                            Gentle herbs that may help support cardiovascular health and healthy blood pressure levels.
+                        </p>
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-accent">Hibiscus</h4>
+                                <p class="text-sm text-muted-foreground">Studies suggest hibiscus tea may help maintain healthy blood pressure.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-accent">Garlic</h4>
+                                <p class="text-sm text-muted-foreground">Traditional cardiovascular support, best used fresh or as extract.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-accent">African Basil</h4>
+                                <p class="text-sm text-muted-foreground">Stress-reducing properties that support overall heart health.</p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                            <p class="text-sm text-red-800"><strong>Caution:</strong> Do not discontinue prescribed medications. Work with your doctor when adding herbs to your routine.</p>
+                        </div>
+                    </div>
+
+                    <!-- Arthritis Support -->
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h2 class="text-2xl font-bold mb-4 text-secondary flex items-center">
+                            <i class="fas fa-hand-holding-heart mr-3"></i>
+                            Arthritis Support
+                        </h2>
+                        <p class="text-muted-foreground mb-6">
+                            Anti-inflammatory herbs that may help ease joint discomfort and support mobility.
+                        </p>
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-secondary">Ginger</h4>
+                                <p class="text-sm text-muted-foreground">Powerful anti-inflammatory properties for joint comfort. Use fresh or as tea.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-secondary">Turmeric</h4>
+                                <p class="text-sm text-muted-foreground">Golden spice with curcumin for inflammation support. Best with black pepper.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-secondary">Moringa</h4>
+                                <p class="text-sm text-muted-foreground">Rich in nutrients that support overall joint and bone health.</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                            <p class="text-sm text-blue-800"><strong>Tip:</strong> Combine with gentle exercise, heat therapy, and a balanced diet for best results.</p>
+                        </div>
+                    </div>
+
+                    <!-- Cancer Support -->
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h2 class="text-2xl font-bold mb-4 text-primary flex items-center">
+                            <i class="fas fa-ribbon mr-3"></i>
+                            General Wellness Support
+                        </h2>
+                        <p class="text-muted-foreground mb-6">
+                            Antioxidant-rich herbs for general wellness and immune support. Not intended as cancer treatment.
+                        </p>
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-primary">Soursop (Mtopeto)</h4>
+                                <p class="text-sm text-muted-foreground">Rich in antioxidants for general immune and vitality support.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-primary">Baobab (Mbuyu)</h4>
+                                <p class="text-sm text-muted-foreground">High vitamin C content supports immune system function.</p>
+                            </div>
+                            <div class="bg-muted p-4 rounded-lg">
+                                <h4 class="font-semibold text-primary">Turmeric</h4>
+                                <p class="text-sm text-muted-foreground">Powerful antioxidant and anti-inflammatory properties for wellness.</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 p-4 rounded-lg">
+                            <p class="text-sm text-purple-800"><strong>Important:</strong> These herbs support general wellness only. Always work with oncologists for cancer treatment and care.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- @END_COMPONENT: AilmentsPage -->
+
+    <!-- @COMPONENT: VideosPage -->
+    <main class="page-section" id="videos-page">
+        <div class="py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h1 class="text-4xl font-bold text-center mb-8">Herbal Preparation Videos</h1>
+                <p class="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                    Learn how to prepare and use herbs safely with our step-by-step video guides.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Video 1 -->
+                    <div class="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+                        <div class="aspect-video bg-muted flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl text-primary mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Video Coming Soon</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">How to Prepare Neem Tea</h3>
+                            <p class="text-muted-foreground text-sm">Learn the traditional method for brewing neem leaves into a beneficial tea.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+                        <div class="aspect-video bg-muted flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl text-primary mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Video Coming Soon</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Moringa Powder Benefits</h3>
+                            <p class="text-muted-foreground text-sm">Discover the nutritional benefits and uses of moringa powder in daily meals.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+                        <div class="aspect-video bg-muted flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl text-primary mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Video Coming Soon</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Making Ginger Tea</h3>
+                            <p class="text-muted-foreground text-sm">Step-by-step guide to preparing fresh ginger tea for digestion and immunity.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 4 -->
+                    <div class="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+                        <div class="aspect-video bg-muted flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl text-primary mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Video Coming Soon</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Chamomile Sleep Remedy</h3>
+                            <p class="text-muted-foreground text-sm">Create the perfect bedtime chamomile tea for better sleep quality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 5 -->
+                    <div class="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+                        <div class="aspect-video bg-muted flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl text-primary mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Video Coming Soon</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Hibiscus for Heart Health</h3>
+                            <p class="text-muted-foreground text-sm">Learn to brew hibiscus tea and understand its cardiovascular benefits.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 6 -->
+                    <div class="bg-card rounded-xl shadow-lg border border-border overflow-hidden">
+                        <div class="aspect-video bg-muted flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle text-5xl text-primary mb-2"></i>
+                                <p class="text-sm text-muted-foreground">Video Coming Soon</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">African Sage Steam Therapy</h3>
+                            <p class="text-muted-foreground text-sm">Traditional steam therapy using African sage for respiratory wellness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- @END_COMPONENT: VideosPage -->
+
+    <!-- @COMPONENT: AboutPage -->
+    <main class="page-section" id="about-page">
+        <div class="py-16 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-bold text-center mb-12">About Herbal Care Hub</h1>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 text-primary">Our Mission</h2>
+                        <p class="text-lg text-muted-foreground mb-6">
+                            To make herbal knowledge simple, safe, and accessible for everyone. We believe that nature has provided us with incredible healing resources, and our goal is to help you discover and use them safely.
+                        </p>
+                        <p class="text-muted-foreground">
+                            At Herbal Care Hub, we bridge the gap between traditional wisdom and modern wellness needs, providing education and guidance for natural health solutions.
+                        </p>
+                    </div>
+                    <div>
+                        <!-- Diverse group of people in nature with herbs -->
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400" alt="People in nature learning about herbs" class="rounded-xl w-full h-64 object-cover" />
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl p-8 shadow-lg border border-border mb-16">
+                    <h2 class="text-3xl font-bold mb-6 text-center text-accent">Our Story</h2>
+                    <p class="text-lg text-muted-foreground text-center mb-6">
+                        "We believe herbs are a gift for health, balance, and vitality."
+                    </p>
+                    <p class="text-muted-foreground mb-4">
+                        Herbal Care Hub was born from a deep appreciation for the wisdom of traditional healers and the growing need for accessible, reliable information about natural wellness. We recognize that many people are seeking alternatives to support their health journey, but often lack reliable guidance.
+                    </p>
+                    <p class="text-muted-foreground mb-4">
+                        Our team combines respect for traditional knowledge with modern research to provide you with safe, practical information about herbs and natural wellness. We focus particularly on African indigenous herbs, which have been used for generations but are often overlooked in modern wellness conversations.
+                    </p>
+                    <p class="text-muted-foreground">
+                        Every herb we feature has been carefully researched for safety and traditional uses. We believe that when used responsibly and with proper knowledge, herbs can be powerful allies in maintaining health and vitality.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="text-center">
+                        <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-leaf text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Natural Approach</h3>
+                        <p class="text-muted-foreground text-sm">We focus on gentle, natural solutions that work with your body's healing processes.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-accent/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-graduation-cap text-2xl text-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Education First</h3>
+                        <p class="text-muted-foreground text-sm">We provide comprehensive education so you can make informed decisions about your wellness.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-secondary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Safety Priority</h3>
+                        <p class="text-muted-foreground text-sm">Safety information and proper guidance are included with every recommendation.</p>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-lg text-center">
+                    <h3 class="text-lg font-semibold mb-2">Important Disclaimer</h3>
+                    <p class="text-sm text-yellow-800">
+                        The information provided on Herbal Care Hub is for educational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers before making changes to your health routine, especially if you have existing health conditions or take medications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- @END_COMPONENT: AboutPage -->
+
+    <!-- @COMPONENT: ContactPage -->
+    <main class="page-section" id="contact-page">
+        <div class="py-16 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-bold text-center mb-8">Contact Us</h1>
+                <p class="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                    Have questions about herbs or natural wellness? We'd love to hear from you!
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                        <h2 class="text-2xl font-bold mb-6">Send us a Message</h2>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2">Your Name</label>
+                                <input type="text" id="name" name="name" 
+                                       class="w-full px-4 py-3 rounded-lg border border-border bg-input focus:ring-2 focus:ring-ring focus:border-transparent"
+                                       placeholder="Enter your full name" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" name="email"
+                                       class="w-full px-4 py-3 rounded-lg border border-border bg-input focus:ring-2 focus:ring-ring focus:border-transparent"
+                                       placeholder="your.email@example.com" required>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
+                                <select id="subject" name="subject"
+                                        class="w-full px-4 py-3 rounded-lg border border-border bg-input focus:ring-2 focus:ring-ring focus:border-transparent">
+                                    <option value="">Select a topic</option>
+                                    <option value="general">General Question</option>
+                                    <option value="herbs">Herb Information</option>
+                                    <option value="safety">Safety Concerns</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5"
+                                          class="w-full px-4 py-3 rounded-lg border border-border bg-input focus:ring-2 focus:ring-ring focus:border-transparent resize-vertical"
+                                          placeholder="Tell us how we can help you..." required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="space-y-8">
+                        <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <i class="fas fa-comments text-primary mr-3"></i>
+                                Quick Connect
+                            </h3>
+                            <p class="text-muted-foreground mb-6">
+                                For immediate questions or consultations, reach out through our messaging platforms:
+                            </p>
+                            <div class="space-y-4">
+                                <a href="#" class="flex items-center space-x-3 p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
+                                    <i class="fab fa-whatsapp text-2xl text-green-600"></i>
+                                    <span class="font-medium">WhatsApp</span>
+                                    <span class="text-sm text-muted-foreground ml-auto">Coming Soon</span>
+                                </a>
+                                <a href="#" class="flex items-center space-x-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+                                    <i class="fab fa-telegram text-2xl text-blue-600"></i>
+                                    <span class="font-medium">Telegram</span>
+                                    <span class="text-sm text-muted-foreground ml-auto">Coming Soon</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <i class="fas fa-clock text-accent mr-3"></i>
+                                Response Time
+                            </h3>
+                            <p class="text-muted-foreground mb-4">
+                                We typically respond to messages within 24-48 hours. For urgent health concerns, please consult with a healthcare professional immediately.
+                            </p>
+                            <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                                <p class="text-sm text-yellow-800">
+                                    <strong>Remember:</strong> We provide educational information only. For medical emergencies or serious health issues, please contact your healthcare provider or emergency services.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-card rounded-xl p-8 shadow-lg border border-border">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <i class="fas fa-heart text-secondary mr-3"></i>
+                                Connect with Us
+                            </h3>
+                            <p class="text-muted-foreground mb-4">
+                                Join our community of natural wellness enthusiasts:
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <a href="#" class="flex items-center justify-center space-x-2 p-3 bg-muted hover:bg-accent/20 rounded-lg transition-colors">
+                                    <i class="fab fa-facebook text-blue-600"></i>
+                                    <span class="text-sm">Facebook</span>
+                                </a>
+                                <a href="#" class="flex items-center justify-center space-x-2 p-3 bg-muted hover:bg-accent/20 rounded-lg transition-colors">
+                                    <i class="fab fa-instagram text-pink-600"></i>
+                                    <span class="text-sm">Instagram</span>
+                                </a>
+                                <a href="#" class="flex items-center justify-center space-x-2 p-3 bg-muted hover:bg-accent/20 rounded-lg transition-colors">
+                                    <i class="fab fa-youtube text-red-600"></i>
+                                    <span class="text-sm">YouTube</span>
+                                </a>
+                                <a href="#" class="flex items-center justify-center space-x-2 p-3 bg-muted hover:bg-accent/20 rounded-lg transition-colors">
+                                    <i class="fab fa-twitter text-blue-400"></i>
+                                    <span class="text-sm">Twitter</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- @END_COMPONENT: ContactPage -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-card border-t border-border mt-auto">
+        <div class="max-w-6xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-leaf text-primary text-2xl"></i>
+                        <span class="text-xl font-bold text-primary">Herbal Care Hub</span>
+                    </div>
+                    <p class="text-muted-foreground mb-4">
+                        Empowering natural wellness through traditional herbal wisdom and modern safety practices.
+                    </p>
+                    <p class="text-sm text-muted-foreground">
+                        Making herbal knowledge simple, safe, and accessible for everyone.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors" data-page="herbs">Herbs Library</a></li>
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors" data-page="wellbeing">Wellbeing</a></li>
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors" data-page="ailments">Ailments</a></li>
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors" data-page="videos">Videos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors" data-page="about">About Us</a></li>
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors" data-page="contact">Contact</a></li>
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors">Safety Guidelines</a></li>
+                        <li><a href="#" class="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-border mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-sm text-muted-foreground mb-4 md:mb-0">
+                        © 2024 Herbal Care Hub. All rights reserved.
+                    </p>
+                    <div class="bg-yellow-50 border border-yellow-200 px-4 py-2 rounded-lg">
+                        <p class="text-xs text-yellow-800 font-medium">
+                            Educational content only - Not medical advice. Consult healthcare providers for medical concerns.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        (function() {
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageSection = document.querySelectorAll('.page-section');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // Page switching functionality
+            function showPage(pageId) {
+                // Hide all pages
+                pageSection.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected page
+                const targetPage = document.getElementById(pageId + '-page');
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                
+                // Update navigation active state
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+
+            // Add click event listeners to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // TODO: Implement search functionality for herbs
+            // TODO: Add herb detail page navigation
+            // TODO: Implement form submission handling
+            // TODO: Add featured herb rotation functionality
+            // TODO: Integrate with actual video content when available
+            // TODO: Add local storage for user preferences
+            // TODO: Implement herb bookmarking system
+            // TODO: Add responsive image loading optimization
+            
+            // Form submission handling (placeholder)
+            const contactForm = document.querySelector('form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement actual form submission logic
+                    alert('Thank you for your message! We will respond within 24-48 hours.');
+                    this.reset();
+                });
+            }
+
+            // Herb card click handling (placeholder for detailed view)
+            const herbCards = document.querySelectorAll('.herb-card');
+            herbCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // TODO: Implement herb detail modal or page
+                    const herbName = this.querySelector('h3').textContent;
+                    console.log('Opening details for:', herbName);
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

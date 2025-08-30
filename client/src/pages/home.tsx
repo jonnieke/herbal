@@ -3,13 +3,36 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import FeaturedHerb from "@/components/herbs/featured-herb";
-import { Brain, Zap, Moon, Scale, Heart, Search, Play } from "lucide-react";
+import { Brain, Zap, Moon, Scale, Heart, Search, Play, Bot, Send, X, Sparkles } from "lucide-react";
 import type { Herb } from "@shared/schema";
-import familyImage from "@assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png";
+const familyImage = "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png";
+
+interface ChatMessage {
+  id: string;
+  type: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
 
 export default function Home() {
   const [featuredHerbIndex, setFeaturedHerbIndex] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isAIOpen, setIsAIOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      type: 'assistant',
+             content: "Hello! I'm your herbal wellness help assistant. I can help you find herbs for specific health concerns, suggest preparation methods, or answer questions about natural remedies. What would you like to know?",
+      timestamp: new Date()
+    }
+  ]);
+  const [userInput, setUserInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   const { data: herbs, isLoading } = useQuery<Herb[]>({
     queryKey: ["/api/herbs"],
@@ -18,6 +41,13 @@ export default function Home() {
   // Featured herbs rotation
   const featuredHerbs = herbs?.filter(herb => 
     ["Ginger", "Chamomile", "Peppermint", "Hibiscus", "Neem", "Moringa"].includes(herb.name)
+  ) || [];
+
+  // Search functionality
+  const filteredHerbs = herbs?.filter(herb =>
+    herb.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    herb.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    herb.benefits.some(benefit => benefit.toLowerCase().includes(searchQuery.toLowerCase()))
   ) || [];
 
   useEffect(() => {
@@ -31,41 +61,152 @@ export default function Home() {
 
   const currentFeaturedHerb = featuredHerbs[featuredHerbIndex];
 
+  // AI Assistant functionality
+  const handleSendMessage = async () => {
+    if (!userInput.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      type: 'user',
+      content: userInput,
+      timestamp: new Date()
+    };
+
+    setChatMessages(prev => [...prev, userMessage]);
+    setUserInput("");
+    setIsTyping(true);
+
+    // Simulate AI response
+    setTimeout(() => {
+      const aiResponse = generateAIResponse(userInput, herbs || []);
+      const assistantMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        type: 'assistant',
+        content: aiResponse,
+        timestamp: new Date()
+      };
+      setChatMessages(prev => [...prev, assistantMessage]);
+      setIsTyping(false);
+    }, 1500);
+  };
+
+  const generateAIResponse = (query: string, availableHerbs: Herb[]): string => {
+    const lowerQuery = query.toLowerCase();
+    
+    // Herb recommendations based on health concerns
+    if (lowerQuery.includes('sleep') || lowerQuery.includes('insomnia') || lowerQuery.includes('rest')) {
+      const sleepHerbs = availableHerbs.filter(herb => 
+        herb.benefits.some(benefit => 
+          benefit.toLowerCase().includes('sleep') || 
+          benefit.toLowerCase().includes('relax') ||
+          benefit.toLowerCase().includes('calm')
+        )
+      );
+      return `For better sleep, I recommend: ${sleepHerbs.map(h => h.name).join(', ')}. These herbs have natural calming properties that can help you relax and improve sleep quality. Try chamomile tea before bedtime or add lavender to your evening routine.`;
+    }
+    
+    if (lowerQuery.includes('energy') || lowerQuery.includes('tired') || lowerQuery.includes('fatigue')) {
+      const energyHerbs = availableHerbs.filter(herb => 
+        herb.benefits.some(benefit => 
+          benefit.toLowerCase().includes('energy') || 
+          benefit.toLowerCase().includes('boost') ||
+          benefit.toLowerCase().includes('vitality')
+        )
+      );
+      return `To boost your energy naturally, try: ${energyHerbs.map(h => h.name).join(', ')}. These herbs can help increase vitality and stamina. Moringa is particularly excellent for sustained energy, while ginger can provide an immediate pick-me-up.`;
+    }
+    
+    if (lowerQuery.includes('digest') || lowerQuery.includes('stomach') || lowerQuery.includes('nausea')) {
+      const digestiveHerbs = availableHerbs.filter(herb => 
+        herb.benefits.some(benefit => 
+          benefit.toLowerCase().includes('digest') || 
+          benefit.toLowerCase().includes('stomach') ||
+          herb.name.toLowerCase().includes('ginger') ||
+          herb.name.toLowerCase().includes('peppermint')
+        )
+      );
+      return `For digestive support, I recommend: ${digestiveHerbs.map(h => h.name).join(', ')}. Ginger is excellent for nausea and morning sickness, while peppermint can soothe stomach discomfort. Try ginger tea after meals or peppermint for bloating relief.`;
+    }
+    
+    if (lowerQuery.includes('immune') || lowerQuery.includes('cold') || lowerQuery.includes('flu')) {
+      const immuneHerbs = availableHerbs.filter(herb => 
+        herb.benefits.some(benefit => 
+          benefit.toLowerCase().includes('immune') || 
+          benefit.toLowerCase().includes('cold') ||
+          benefit.toLowerCase().includes('infection')
+        )
+      );
+      return `To support your immune system, consider: ${immuneHerbs.map(h => h.name).join(', ')}. These herbs have natural antimicrobial and immune-boosting properties. Turmeric with black pepper is particularly effective for overall immune support.`;
+    }
+    
+    if (lowerQuery.includes('stress') || lowerQuery.includes('anxiety') || lowerQuery.includes('calm')) {
+      const stressHerbs = availableHerbs.filter(herb => 
+        herb.benefits.some(benefit => 
+          benefit.toLowerCase().includes('stress') || 
+          benefit.toLowerCase().includes('anxiety') ||
+          benefit.toLowerCase().includes('calm') ||
+          benefit.toLowerCase().includes('relax')
+        )
+      );
+      return `For stress and anxiety relief, try: ${stressHerbs.map(h => h.name).join(', ')}. These herbs have natural calming properties. Chamomile tea is excellent for daily stress relief, while African sage can help with mental clarity during stressful times.`;
+    }
+    
+    if (lowerQuery.includes('skin') || lowerQuery.includes('acne') || lowerQuery.includes('healing')) {
+      const skinHerbs = availableHerbs.filter(herb => 
+        herb.benefits.some(benefit => 
+          benefit.toLowerCase().includes('skin') || 
+          benefit.toLowerCase().includes('healing') ||
+          herb.name.toLowerCase().includes('aloe') ||
+          herb.name.toLowerCase().includes('neem')
+        )
+      );
+      return `For skin health, I recommend: ${skinHerbs.map(h => h.name).join(', ')}. Aloe vera is excellent for burns and skin healing, while neem has powerful antimicrobial properties for acne. Turmeric can also help with skin brightening and inflammation.`;
+    }
+    
+    // General herb information
+    if (lowerQuery.includes('herb') || lowerQuery.includes('plant')) {
+      return `I can help you learn about various herbs and their benefits! Some popular herbs include ginger (digestive support), chamomile (sleep and relaxation), moringa (energy and nutrition), and turmeric (anti-inflammatory). What specific health concern are you looking to address?`;
+    }
+    
+    // Default response
+    return `I'm here to help you with herbal wellness! I can recommend herbs for specific health concerns like sleep, energy, digestion, immune support, stress, or skin health. Just let me know what you're looking for, and I'll suggest the best natural remedies. You can also ask me about preparation methods or how to incorporate herbs into your daily routine.`;
+  };
+
   const wellnessCategories = [
     {
       icon: Brain,
       title: "Mental Health",
       description: "Find calm and clarity with natural herbs",
       color: "text-primary",
-      href: "/wellbeing#mental-health"
+      href: "/mental-health"
     },
     {
       icon: Zap,
       title: "Energy",
       description: "Boost vitality and stamina naturally",
       color: "text-accent",
-      href: "/wellbeing#energy"
+      href: "/energy"
     },
     {
       icon: Moon,
       title: "Sleep",
       description: "Rest better with soothing herbs",
       color: "text-secondary",
-      href: "/wellbeing#sleep"
+      href: "/sleep"
     },
     {
       icon: Scale,
       title: "Weight Balance",
       description: "Support healthy weight management",
       color: "text-primary",
-      href: "/wellbeing#weight"
+      href: "/weight-balance"
     },
     {
       icon: Heart,
       title: "General Wellness",
       description: "Overall health and vitality support",
       color: "text-accent",
-      href: "/wellbeing#general"
+      href: "/general-wellness"
     }
   ];
 
@@ -82,7 +223,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero Section */}
+      {/* Hero Section with Search */}
       <section className="relative">
         <div className="bg-gradient-to-br from-accent/20 to-secondary/30 py-16 px-4 pl-[16px] pr-[16px] pt-[10px] pb-[10px]">
           <div className="max-w-7xl mx-auto">
@@ -91,6 +232,58 @@ export default function Home() {
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6" data-testid="text-hero-title">
                   Feel stronger, calmer, and more alive—naturally
                 </h1>
+                
+                {/* Search Bar */}
+                <div className="mb-6">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                    <Input
+                      type="text"
+                      placeholder="Search herbs by name, benefits, or health concern..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10 pr-4 py-3 text-lg border-2 border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                  
+                  {/* Search Results */}
+                  {searchQuery && filteredHerbs.length > 0 && (
+                    <div className="mt-4 bg-card rounded-lg shadow-lg border border-border max-h-64 overflow-y-auto">
+                      {filteredHerbs.slice(0, 5).map((herb) => (
+                        <Link key={herb.id} href={`/herbs#${herb.id}`}>
+                          <div className="p-4 hover:bg-accent/10 cursor-pointer border-b border-border last:border-b-0">
+                            <div className="flex items-center gap-3">
+                              <span className="text-2xl">{herb.emoji}</span>
+                              <div>
+                                <h3 className="font-semibold text-foreground">{herb.name}</h3>
+                                <p className="text-sm text-muted-foreground line-clamp-2">{herb.description}</p>
+                                <div className="flex flex-wrap gap-1 mt-1">
+                                  {herb.benefits.slice(0, 2).map((benefit, index) => (
+                                    <Badge key={index} variant="secondary" className="text-xs">
+                                      {benefit}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                      {filteredHerbs.length > 5 && (
+                        <div className="p-4 text-center text-sm text-muted-foreground">
+                          And {filteredHerbs.length - 5} more herbs...
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {searchQuery && filteredHerbs.length === 0 && (
+                    <div className="mt-4 bg-card rounded-lg shadow-lg border border-border p-4">
+                      <p className="text-muted-foreground text-center">No herbs found matching "{searchQuery}"</p>
+                    </div>
+                  )}
+                </div>
+
                 <div className="bg-primary/90 text-primary-foreground p-6 rounded-xl mb-6">
                   <p className="text-lg italic mb-2 text-[#b58700]">
                     "I have given you all these trees for you to eat..."
@@ -99,11 +292,113 @@ export default function Home() {
                     At Herbal Care Hub, we help you discover natural ways to boost energy, improve mental health, sleep better, and support wellbeing.
                   </p>
                 </div>
-                <Link href="/herbs">
-                  <Button size="lg" className="text-lg font-semibold px-8 py-3" data-testid="button-explore-herbs">
-                    Explore Herbs
-                  </Button>
-                </Link>
+                
+                <div className="flex gap-4">
+                  <Link href="/herbs">
+                    <Button size="lg" className="text-lg font-semibold px-8 py-3" data-testid="button-explore-herbs">
+                      Explore Herbs
+                    </Button>
+                  </Link>
+                  
+                  {/* AI Assistant Button */}
+                  <Dialog open={isAIOpen} onOpenChange={setIsAIOpen}>
+                    <DialogTrigger asChild>
+                      <Button size="lg" variant="outline" className="text-lg font-semibold px-8 py-3">
+                        <Bot className="h-5 w-5 mr-2" />
+                        AI Assistant
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
+                      <DialogHeader>
+                                       <DialogTitle className="flex items-center gap-2">
+                 <Bot className="h-5 w-5" />
+                 Herbal Wellness Help Assistant
+               </DialogTitle>
+                      </DialogHeader>
+                      
+                      <div className="flex-1 flex flex-col min-h-0">
+                        {/* Chat Messages */}
+                        <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-4 bg-muted/20 rounded-lg">
+                          {chatMessages.map((message) => (
+                            <div
+                              key={message.id}
+                              className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                            >
+                              <div
+                                className={`max-w-[80%] p-3 rounded-lg ${
+                                  message.type === 'user'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'bg-card border border-border'
+                                }`}
+                              >
+                                <p className="text-sm">{message.content}</p>
+                                <p className="text-xs opacity-70 mt-1">
+                                  {message.timestamp.toLocaleTimeString()}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                          {isTyping && (
+                            <div className="flex justify-start">
+                              <div className="bg-card border border-border p-3 rounded-lg">
+                                <div className="flex space-x-1">
+                                  <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
+                                  <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                  <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Input Area */}
+                        <div className="flex gap-2">
+                          <Textarea
+                            placeholder="Ask about herbs, health concerns, or preparation methods..."
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
+                            className="flex-1 resize-none"
+                            rows={2}
+                          />
+                          <Button
+                            onClick={handleSendMessage}
+                            disabled={!userInput.trim() || isTyping}
+                            className="px-4"
+                          >
+                            <Send className="h-4 w-4" />
+                          </Button>
+                        </div>
+                        
+                        {/* Quick Suggestions */}
+                        <div className="mt-3">
+                          <p className="text-xs text-muted-foreground mb-2">Quick suggestions:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {[
+                              "Help me sleep better",
+                              "Boost my energy",
+                              "Digestive support",
+                              "Stress relief"
+                            ].map((suggestion) => (
+                              <Button
+                                key={suggestion}
+                                variant="outline"
+                                size="sm"
+                                onClick={() => {
+                                  setUserInput(suggestion);
+                                  setTimeout(() => handleSendMessage(), 100);
+                                }}
+                                className="text-xs"
+                              >
+                                {suggestion}
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </div>
               <div className="order-1 lg:order-2">
                 <div className="relative">
@@ -165,7 +460,7 @@ export default function Home() {
                 </div>
                 <div className="flex justify-center">
                   <img 
-                    src={currentFeaturedHerb.imageUrl || "https://via.placeholder.com/400x300?text=Featured+Herb"} 
+                    src={currentFeaturedHerb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png"} 
                     alt={currentFeaturedHerb.name}
                     className="rounded-2xl w-full max-w-sm h-64 object-cover shadow-md"
                   />

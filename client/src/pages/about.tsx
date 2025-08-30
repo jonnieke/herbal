@@ -45,8 +45,8 @@ export default function About() {
           </div>
           <div>
             <img 
-              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400" 
-              alt="People in nature learning about herbs" 
+              src="/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png" 
+              alt="Family enjoying herbal tea together" 
               className="rounded-xl w-full h-64 object-cover"
             />
           </div>

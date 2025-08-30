@@ -17,7 +17,7 @@ export default function Wellbeing() {
         { name: "African Sage", benefit: "Calming aromatherapy benefits" }
       ],
       tips: "Practice deep breathing, maintain a regular sleep schedule, and create calming bedtime rituals with herbal teas.",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400"
+      image: "/attached_assets/generated_images/Chamomile_flowers_blooming_fcc5a2fb.png"
     },
     {
       id: "energy",
@@ -32,7 +32,7 @@ export default function Wellbeing() {
         { name: "Ginger", benefit: "Circulation and digestive energy" }
       ],
       tips: "Stay hydrated, eat nutrient-dense foods, get morning sunlight, and maintain regular exercise for sustained energy.",
-      image: "https://images.unsplash.com/photo-1529693662653-9d480530a697?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400"
+      image: "/attached_assets/generated_images/Fresh_moringa_plant_leaves_f8771929.png"
     },
     {
       id: "sleep",
@@ -47,7 +47,7 @@ export default function Wellbeing() {
         { name: "Hibiscus", benefit: "Evening wind-down ritual" }
       ],
       tips: "Create a consistent bedtime routine, limit screen time before sleep, and keep your bedroom cool and dark.",
-      image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400"
+      image: "/attached_assets/generated_images/African_sage_plant_11f1d049.png"
     },
     {
       id: "weight",
@@ -62,7 +62,7 @@ export default function Wellbeing() {
         { name: "Moringa", benefit: "Nutrient density for healthy meals" }
       ],
       tips: "Focus on whole foods, regular meals, portion control, and combining herbs with balanced nutrition and physical activity.",
-      image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=400"
+      image: "/attached_assets/generated_images/Neem_tree_leaves_8f8d6bbc.png"
     }
   ];
 

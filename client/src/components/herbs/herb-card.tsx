@@ -16,7 +16,7 @@ export default function HerbCard({ herb, onClick }: HerbCardProps) {
     >
       <div className="aspect-video overflow-hidden">
         <img 
-          src={herb.imageUrl || "https://via.placeholder.com/400x250?text=Herb"} 
+          src={herb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png"} 
           alt={herb.name}
           className="w-full h-full object-cover"
         />
