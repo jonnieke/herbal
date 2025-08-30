@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Scale, Apple, Activity, Heart, Brain, Leaf, TrendingDown, Clock, Target, AlertTriangle, Info, Lightbulb, BookOpen } from "lucide-react";
+import { Scale, Apple, Heart, Leaf, Clock, Target, AlertTriangle } from "lucide-react";
 import HerbCard from "@/components/herbs/herb-card";
 import HerbDetailModal from "@/components/herbs/herb-detail-modal";
 import type { Herb } from "@shared/schema";

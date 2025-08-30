@@ -418,7 +418,7 @@ export default function Home() {
       <section className="py-16 px-4 bg-muted/30 pt-[10px] pb-[10px]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
-            {wellnessCategories.map((category, index) => {
+            {wellnessCategories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <Link key={category.title} href={category.href}>

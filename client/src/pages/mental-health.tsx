@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Brain, Heart, Leaf, BookOpen, Lightbulb, Users } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Brain, Heart, Leaf } from "lucide-react";
 import HerbCard from "@/components/herbs/herb-card";
 import HerbDetailModal from "@/components/herbs/herb-detail-modal";
 import type { Herb } from "@shared/schema";
