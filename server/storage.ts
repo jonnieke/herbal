@@ -1,5 +1,10 @@
 import { type User, type InsertUser, type Herb, type InsertHerb, type ContactMessage, type InsertContactMessage, type CommunityPost, type InsertCommunityPost, type CommunityComment, type InsertCommunityComment, type CommunityLike, type InsertCommunityLike } from "../shared/schema";
 import { randomUUID } from "crypto";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// Initialize Gemini AI
+console.log('GEMINI_API_KEY in storage:', process.env.GEMINI_API_KEY ? 'Present' : 'Missing');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "AIzaSyAsJW1alG2KuS8qEi3tTZn-KeaRNGf5Q0Y");
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -33,6 +38,8 @@ export interface IStorage {
   unlikeComment(commentId: string, userEmail: string): Promise<boolean>;
   hasUserLikedPost(postId: string, userEmail: string): Promise<boolean>;
   hasUserLikedComment(commentId: string, userEmail: string): Promise<boolean>;
+  getAIHerbInfo(query: string): Promise<any>;
+  getAIWellnessResponse(message: string): Promise<any>;
 }
 
 export class MemStorage implements IStorage {
@@ -781,6 +788,118 @@ export class MemStorage implements IStorage {
     return Array.from(this.communityLikes.values()).some(
       like => like.commentId === commentId && like.userEmail === userEmail
     );
+  }
+
+  async getAIHerbInfo(query: string): Promise<any> {
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      
+      const prompt = `Provide comprehensive information about the herb "${query}" in the following JSON format:
+      {
+        "name": "Herb Name",
+        "description": "Brief description of the herb",
+        "benefits": ["Benefit 1", "Benefit 2", "Benefit 3"],
+        "usage": "How to use this herb",
+        "dosage": "Recommended dosage information",
+        "preparation": "How to prepare this herb (tea, tincture, etc.)",
+        "interactions": ["Drug interaction 1", "Drug interaction 2"],
+        "warnings": ["Warning 1", "Warning 2"],
+        "category": "Wellness category (e.g., Digestive, Immune, Sleep)"
+      }
+      
+      Focus on traditional uses, scientific evidence, safety, and practical applications. Be accurate and include important warnings.`;
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+      
+      // Extract JSON from the response
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        return JSON.parse(jsonMatch[0]);
+      }
+      
+      // Fallback response if JSON parsing fails
+      return {
+        name: query,
+        description: "Information about this herb",
+        benefits: ["Traditional wellness support"],
+        usage: "Consult with a healthcare provider",
+        dosage: "Follow recommended guidelines",
+        preparation: "Various methods available",
+        interactions: ["May interact with medications"],
+        warnings: ["Consult healthcare provider before use"],
+        category: "Wellness"
+      };
+    } catch (error) {
+      console.error("Gemini API error:", error);
+      // Return fallback response
+      return {
+        name: query,
+        description: "Unable to fetch information at this time. Please try again later.",
+        benefits: ["Traditional wellness support"],
+        usage: "Consult with a healthcare provider",
+        dosage: "Follow recommended guidelines",
+        preparation: "Various methods available",
+        interactions: ["May interact with medications"],
+        warnings: ["Consult healthcare provider before use"],
+        category: "Wellness"
+      };
+    }
+  }
+
+  async getAIWellnessResponse(message: string): Promise<any> {
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      
+      const prompt = `You are a knowledgeable wellness assistant specializing in herbal medicine and natural health. 
+      Respond to this user question: "${message}"
+      
+      Provide helpful, accurate advice while emphasizing:
+      1. Safety and consulting healthcare providers
+      2. Traditional uses of herbs
+      3. Practical recommendations
+      4. Important warnings and contraindications
+      
+      Keep your response conversational and supportive. Include 2-3 follow-up question suggestions that would be helpful.
+      
+      Format your response as JSON:
+      {
+        "response": "Your helpful response here",
+        "suggestions": ["Follow-up question 1", "Follow-up question 2", "Follow-up question 3"]
+      }`;
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+      
+      // Extract JSON from the response
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        return JSON.parse(jsonMatch[0]);
+      }
+      
+      // Fallback response if JSON parsing fails
+      return {
+        response: "I'm here to help with your wellness questions. Please consult with a healthcare provider for personalized advice.",
+        suggestions: [
+          "What specific symptoms are you experiencing?",
+          "Are you currently taking any medications?",
+          "What's your primary wellness goal?"
+        ]
+      };
+    } catch (error) {
+      console.error("Gemini API error:", error);
+      // Return fallback response
+      return {
+        response: "I'm experiencing technical difficulties right now. Please try again later or consult with a healthcare provider for immediate concerns.",
+        suggestions: [
+          "What specific symptoms are you experiencing?",
+          "Are you currently taking any medications?",
+          "What's your primary wellness goal?"
+        ]
+      };
+    }
   }
 }
 
