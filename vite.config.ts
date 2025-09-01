@@ -14,7 +14,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "client", "src"),
       "@shared": path.resolve(__dirname, "shared"),
       "@assets": path.resolve(__dirname, "attached_assets"),
+      "@/shared": path.resolve(__dirname, "shared"),
     },
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
   root: path.resolve(__dirname, "client"),
   build: {
@@ -23,8 +25,11 @@ export default defineConfig({
   },
   server: {
     fs: {
-      strict: true,
+      strict: false,
       deny: ["**/.*"],
     },
+  },
+  esbuild: {
+    loader: 'tsx',
   },
 });
