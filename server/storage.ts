@@ -811,7 +811,7 @@ export class MemStorage implements IStorage {
     }
     
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       
       const prompt = `Provide comprehensive information about the herb "${query}" in the following JSON format:
       {
@@ -880,7 +880,7 @@ export class MemStorage implements IStorage {
     }
     
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       
       const prompt = `You are a herbal wellness assistant. Answer in BULLET POINTS ONLY.
 
