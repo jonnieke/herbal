@@ -22,7 +22,7 @@ import {
   User,
   ThumbsUp
 } from "lucide-react";
-import type { CommunityPost, CommunityComment } from "../../shared/schema";
+import type { CommunityPost, CommunityComment } from "@/shared/schema";
 
 interface CreatePostForm {
   authorName: string;
@@ -204,7 +204,7 @@ export default function Community() {
     const matchesSearch = searchQuery === "" || 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (post.tags && post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
+      (post.tags && post.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase())));
     
     return matchesCategory && matchesSearch;
   });
@@ -536,7 +536,7 @@ export default function Community() {
                   
                   {post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.map((tag, index) => (
+                      {post.tags.map((tag: string, index: number) => (
                         <Badge key={index} variant="outline" className="text-xs">
                           <Tag className="h-3 w-3 mr-1" />
                           {tag}
