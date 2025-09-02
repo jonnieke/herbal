@@ -32,11 +32,13 @@ export default function FloatingAIAssistant() {
       const latestMessage = chatMessages[chatMessages.length - 1];
       if (latestMessage.type === 'assistant') {
         setTimeout(() => {
-          latestResponseRef.current?.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }, 100);
+          // Scroll the response into view at the top
+          const scrollContainer = latestResponseRef.current?.closest('.overflow-y-auto');
+          if (scrollContainer && latestResponseRef.current) {
+            const responseElement = latestResponseRef.current;
+            scrollContainer.scrollTop = responseElement.offsetTop - 10;
+          }
+        }, 200);
       }
     }
   }, [chatMessages, isTyping]);
@@ -103,7 +105,7 @@ export default function FloatingAIAssistant() {
             <Bot className="h-6 w-6" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
+        <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col border-2 border-primary/20 shadow-xl">
           <DialogHeader>
                          <DialogTitle className="flex items-center gap-2">
                <Bot className="h-5 w-5" />
