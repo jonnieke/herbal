@@ -187,6 +187,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // AI Wellness Assistant endpoint
+  app.post("/api/ai/wellness", async (req, res) => {
+    try {
+      const { message } = req.body;
+      if (!message || typeof message !== 'string') {
+        return res.status(400).json({ message: "Message is required" });
+      }
+      
+      const response = await storage.getAIWellnessResponse(message);
+      res.json(response);
+    } catch (error) {
+      console.error("AI wellness endpoint error:", error);
+      res.status(500).json({ 
+        response: "I'm experiencing technical difficulties right now. Please try again later.",
+        suggestions: [
+          "What specific symptoms are you experiencing?",
+          "Are you currently taking any medications?",
+          "What's your primary wellness goal?"
+        ]
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

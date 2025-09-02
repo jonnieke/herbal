@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,10 +26,13 @@ export default function FloatingAIAssistant() {
   ]);
   const [userInput, setUserInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { data: herbs } = useQuery<Herb[]>({
-    queryKey: ["/api/herbs"],
-  });
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages, isTyping]);
+
 
   const handleSendMessage = async () => {
     if (!userInput.trim()) return;
@@ -42,21 +45,42 @@ export default function FloatingAIAssistant() {
     };
 
     setChatMessages(prev => [...prev, userMessage]);
+    const currentInput = userInput;
     setUserInput("");
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(userInput, herbs || []);
+    try {
+      // Call the real Gemini API
+      const response = await fetch('/api/ai/wellness', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: currentInput })
+      });
+
+      const data = await response.json();
+      
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: aiResponse,
+        content: data.response || "I'm sorry, I couldn't process your request right now. Please try again.",
         timestamp: new Date()
       };
+      
       setChatMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error calling AI API:', error);
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 2).toString(),
+        type: 'assistant',
+        content: "I'm experiencing technical difficulties. Please try again in a moment.",
+        timestamp: new Date()
+      };
+      setChatMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const generateAIResponse = (query: string, availableHerbs: Herb[]): string => {
@@ -204,6 +228,7 @@ export default function FloatingAIAssistant() {
                   </div>
                 </div>
               )}
+              <div ref={messagesEndRef} />
             </div>
             
             {/* Input Area */}
