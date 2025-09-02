@@ -25,10 +25,7 @@ export default function FloatingAIAssistant() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when new messages arrive
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chatMessages, isTyping]);
+  // Removed auto-scroll to allow users to read responses without interruption
 
 
   const handleSendMessage = async () => {

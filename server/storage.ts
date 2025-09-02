@@ -855,17 +855,19 @@ export class MemStorage implements IStorage {
       const prompt = `You are a knowledgeable wellness assistant specializing in herbal medicine and natural health. 
       Respond to this user question: "${message}"
       
-      Provide helpful, accurate advice while emphasizing:
-      1. Safety and consulting healthcare providers
-      2. Traditional uses of herbs
-      3. Practical recommendations
-      4. Important warnings and contraindications
+      IMPORTANT: Keep your response SHORT and in BULLET POINTS format. Use this structure:
       
-      Keep your response conversational and supportive. Include 2-3 follow-up question suggestions that would be helpful.
+      • [Main herb/remedy recommendation]
+      • [How to use it - brief]
+      • [Key benefit - one line]
+      • [Safety note if needed - one line]
+      
+      Maximum 4-5 bullet points total. Be concise and practical.
+      Include 2-3 brief follow-up question suggestions.
       
       Format your response as JSON:
       {
-        "response": "Your helpful response here",
+        "response": "Your bullet point response here",
         "suggestions": ["Follow-up question 1", "Follow-up question 2", "Follow-up question 3"]
       }`;
 
