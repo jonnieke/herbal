@@ -73,104 +73,44 @@ export default function Home() {
     };
 
     setChatMessages(prev => [...prev, userMessage]);
+    const currentInput = userInput;
     setUserInput("");
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(userInput, herbs || []);
+    try {
+      // Call the real Gemini API
+      const response = await fetch('/api/ai/wellness', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: currentInput })
+      });
+
+      const data = await response.json();
+      
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: aiResponse,
+        content: data.response || "I'm sorry, I couldn't process your request right now. Please try again.",
         timestamp: new Date()
       };
+      
       setChatMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error calling AI API:', error);
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 2).toString(),
+        type: 'assistant',
+        content: "I'm experiencing technical difficulties. Please try again in a moment.",
+        timestamp: new Date()
+      };
+      setChatMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
-  const generateAIResponse = (query: string, availableHerbs: Herb[]): string => {
-    const lowerQuery = query.toLowerCase();
-    
-    // Herb recommendations based on health concerns
-    if (lowerQuery.includes('sleep') || lowerQuery.includes('insomnia') || lowerQuery.includes('rest')) {
-      const sleepHerbs = availableHerbs.filter(herb => 
-        herb.benefits.some(benefit => 
-          benefit.toLowerCase().includes('sleep') || 
-          benefit.toLowerCase().includes('relax') ||
-          benefit.toLowerCase().includes('calm')
-        )
-      );
-      return `For better sleep, I recommend: ${sleepHerbs.map(h => h.name).join(', ')}. These herbs have natural calming properties that can help you relax and improve sleep quality. Try chamomile tea before bedtime or add lavender to your evening routine.`;
-    }
-    
-    if (lowerQuery.includes('energy') || lowerQuery.includes('tired') || lowerQuery.includes('fatigue')) {
-      const energyHerbs = availableHerbs.filter(herb => 
-        herb.benefits.some(benefit => 
-          benefit.toLowerCase().includes('energy') || 
-          benefit.toLowerCase().includes('boost') ||
-          benefit.toLowerCase().includes('vitality')
-        )
-      );
-      return `To boost your energy naturally, try: ${energyHerbs.map(h => h.name).join(', ')}. These herbs can help increase vitality and stamina. Moringa is particularly excellent for sustained energy, while ginger can provide an immediate pick-me-up.`;
-    }
-    
-    if (lowerQuery.includes('digest') || lowerQuery.includes('stomach') || lowerQuery.includes('nausea')) {
-      const digestiveHerbs = availableHerbs.filter(herb => 
-        herb.benefits.some(benefit => 
-          benefit.toLowerCase().includes('digest') || 
-          benefit.toLowerCase().includes('stomach') ||
-          herb.name.toLowerCase().includes('ginger') ||
-          herb.name.toLowerCase().includes('peppermint')
-        )
-      );
-      return `For digestive support, I recommend: ${digestiveHerbs.map(h => h.name).join(', ')}. Ginger is excellent for nausea and morning sickness, while peppermint can soothe stomach discomfort. Try ginger tea after meals or peppermint for bloating relief.`;
-    }
-    
-    if (lowerQuery.includes('immune') || lowerQuery.includes('cold') || lowerQuery.includes('flu')) {
-      const immuneHerbs = availableHerbs.filter(herb => 
-        herb.benefits.some(benefit => 
-          benefit.toLowerCase().includes('immune') || 
-          benefit.toLowerCase().includes('cold') ||
-          benefit.toLowerCase().includes('infection')
-        )
-      );
-      return `To support your immune system, consider: ${immuneHerbs.map(h => h.name).join(', ')}. These herbs have natural antimicrobial and immune-boosting properties. Turmeric with black pepper is particularly effective for overall immune support.`;
-    }
-    
-    if (lowerQuery.includes('stress') || lowerQuery.includes('anxiety') || lowerQuery.includes('calm')) {
-      const stressHerbs = availableHerbs.filter(herb => 
-        herb.benefits.some(benefit => 
-          benefit.toLowerCase().includes('stress') || 
-          benefit.toLowerCase().includes('anxiety') ||
-          benefit.toLowerCase().includes('calm') ||
-          benefit.toLowerCase().includes('relax')
-        )
-      );
-      return `For stress and anxiety relief, try: ${stressHerbs.map(h => h.name).join(', ')}. These herbs have natural calming properties. Chamomile tea is excellent for daily stress relief, while African sage can help with mental clarity during stressful times.`;
-    }
-    
-    if (lowerQuery.includes('skin') || lowerQuery.includes('acne') || lowerQuery.includes('healing')) {
-      const skinHerbs = availableHerbs.filter(herb => 
-        herb.benefits.some(benefit => 
-          benefit.toLowerCase().includes('skin') || 
-          benefit.toLowerCase().includes('healing') ||
-          herb.name.toLowerCase().includes('aloe') ||
-          herb.name.toLowerCase().includes('neem')
-        )
-      );
-      return `For skin health, I recommend: ${skinHerbs.map(h => h.name).join(', ')}. Aloe vera is excellent for burns and skin healing, while neem has powerful antimicrobial properties for acne. Turmeric can also help with skin brightening and inflammation.`;
-    }
-    
-    // General herb information
-    if (lowerQuery.includes('herb') || lowerQuery.includes('plant')) {
-      return `I can help you learn about various herbs and their benefits! Some popular herbs include ginger (digestive support), chamomile (sleep and relaxation), moringa (energy and nutrition), and turmeric (anti-inflammatory). What specific health concern are you looking to address?`;
-    }
-    
-    // Default response
-    return `I'm here to help you with herbal wellness! I can recommend herbs for specific health concerns like sleep, energy, digestion, immune support, stress, or skin health. Just let me know what you're looking for, and I'll suggest the best natural remedies. You can also ask me about preparation methods or how to incorporate herbs into your daily routine.`;
-  };
 
   const wellnessCategories = [
     {
