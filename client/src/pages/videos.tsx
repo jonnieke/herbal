@@ -7,6 +7,102 @@ import { Play, Clock, ChefHat, List } from "lucide-react";
 export default function Videos() {
   const videos = [
     {
+      id: "turmeric-arthritis",
+      title: "Turmeric Remedy for Arthritis Pain",
+      description: "Natural anti-inflammatory remedy using turmeric to reduce joint pain and stiffness.",
+      thumbnail: "/attached_assets/generated_images/Fresh_turmeric_root_powder_2c202d36.png",
+      duration: "4:20",
+      difficulty: "Easy",
+      ingredients: ["Turmeric powder", "Warm milk or water", "Black pepper", "Honey"],
+      steps: [
+        "Mix 1 tsp turmeric powder with warm milk",
+        "Add a pinch of black pepper for better absorption",
+        "Stir in honey for taste",
+        "Drink twice daily for best results",
+        "Consult your doctor for persistent pain"
+      ]
+    },
+    {
+      id: "garlic-cholesterol",
+      title: "Garlic for High Cholesterol",
+      description: "Learn how to use garlic as a natural remedy to help manage cholesterol levels.",
+      thumbnail: "/attached_assets/generated_images/Fresh_garlic_cloves_peeled_566ff3c0.png",
+      duration: "3:45",
+      difficulty: "Easy",
+      ingredients: ["Fresh garlic cloves", "Warm water", "Lemon juice (optional)"],
+      steps: [
+        "Crush 2-3 fresh garlic cloves",
+        "Let sit for 10 minutes to activate compounds",
+        "Swallow with warm water on empty stomach",
+        "Add lemon juice if desired",
+        "Use for 2-3 weeks, then take a break"
+      ]
+    },
+    {
+      id: "aloe-acne",
+      title: "Aloe Vera for Clear Skin & Acne",
+      description: "Natural skincare remedy using aloe vera to treat acne and achieve clear, healthy skin.",
+      thumbnail: "/attached_assets/generated_images/Fresh_aloe_vera_plant_37ed8ded.png",
+      duration: "5:15",
+      difficulty: "Easy",
+      ingredients: ["Fresh aloe vera gel", "Tea tree oil (optional)", "Clean cloth"],
+      steps: [
+        "Extract fresh gel from aloe vera leaf",
+        "Apply thin layer to clean face",
+        "Add 1 drop tea tree oil for stubborn acne",
+        "Leave for 15-20 minutes",
+        "Rinse with cool water, pat dry"
+      ]
+    },
+    {
+      id: "onion-hair-growth",
+      title: "Onion Juice for Hair Growth",
+      description: "Traditional remedy using onion juice to stimulate hair growth and reduce hair loss.",
+      thumbnail: "/attached_assets/generated_images/Fresh_red_onions_sliced_bb2a7403.png",
+      duration: "6:30",
+      difficulty: "Medium",
+      ingredients: ["Medium onion", "Coconut oil", "Essential oil for scent"],
+      steps: [
+        "Grate or blend 1 medium onion",
+        "Strain to extract pure juice",
+        "Mix with 1 tbsp coconut oil",
+        "Massage into scalp for 5 minutes",
+        "Leave for 30 minutes, then shampoo thoroughly"
+      ]
+    },
+    {
+      id: "honey-cough",
+      title: "Honey & Ginger Cough Remedy",
+      description: "Soothing natural cough syrup using honey and ginger to relieve throat irritation.",
+      thumbnail: "/attached_assets/generated_images/Raw_honey_jar_ginger_63a42cf4.png",
+      duration: "4:00",
+      difficulty: "Easy",
+      ingredients: ["Raw honey", "Fresh ginger", "Warm water", "Lemon juice"],
+      steps: [
+        "Grate 1 tsp fresh ginger",
+        "Mix with 2 tbsp raw honey",
+        "Add lemon juice and warm water",
+        "Take 1 tsp every 2-3 hours",
+        "Best taken before meals"
+      ]
+    },
+    {
+      id: "cucumber-dark-circles",
+      title: "Cucumber for Dark Under-Eye Circles",
+      description: "Simple and effective remedy to reduce dark circles and puffiness around the eyes.",
+      thumbnail: "/attached_assets/generated_images/Fresh_cucumber_slices_cooling_f0ef1ea8.png",
+      duration: "2:45",
+      difficulty: "Easy",
+      ingredients: ["Fresh cucumber", "Rose water", "Cotton pads"],
+      steps: [
+        "Slice cucumber into thick rounds",
+        "Chill in refrigerator for 30 minutes",
+        "Soak cotton pads in rose water",
+        "Place cucumber slices on closed eyes",
+        "Relax for 15-20 minutes daily"
+      ]
+    },
+    {
       id: "neem-tea",
       title: "How to Prepare Neem Tea",
       description: "Learn the traditional method for brewing neem leaves into a beneficial tea.",
@@ -111,11 +207,17 @@ export default function Videos() {
     <div className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-8" data-testid="text-page-title">
-          Herbal Preparation Videos
+          Natural Home Remedies Videos
         </h1>
-        <p className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-          Learn how to prepare and use herbs safely with our step-by-step video guides.
+        <p className="text-lg text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+          Practical home remedies for common health conditions using natural ingredients
         </p>
+        <div className="bg-green-100 border border-green-300 rounded-lg p-4 max-w-3xl mx-auto mb-12">
+          <p className="text-green-800 text-sm text-center">
+            📺 <strong>Inspired by SUSANA HOME REMEDIES</strong> - Educational content for natural wellness.<br />
+            <em>Always consult healthcare professionals before trying new remedies.</em>
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {videos.map((video) => (
