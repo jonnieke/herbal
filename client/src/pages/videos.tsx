@@ -13,6 +13,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_turmeric_root_powder_2c202d36.png",
       duration: "4:20",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/gaKd6C8ZOVs",
       ingredients: ["Turmeric powder", "Warm milk or water", "Black pepper", "Honey"],
       steps: [
         "Mix 1 tsp turmeric powder with warm milk",
@@ -29,6 +30,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_garlic_cloves_peeled_566ff3c0.png",
       duration: "3:45",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/IOjFHZHlQdU",
       ingredients: ["Fresh garlic cloves", "Warm water", "Lemon juice (optional)"],
       steps: [
         "Crush 2-3 fresh garlic cloves",
@@ -45,6 +47,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_aloe_vera_plant_37ed8ded.png",
       duration: "5:15",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Fresh aloe vera gel", "Tea tree oil (optional)", "Clean cloth"],
       steps: [
         "Extract fresh gel from aloe vera leaf",
@@ -61,6 +64,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_red_onions_sliced_bb2a7403.png",
       duration: "6:30",
       difficulty: "Medium",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Medium onion", "Coconut oil", "Essential oil for scent"],
       steps: [
         "Grate or blend 1 medium onion",
@@ -77,6 +81,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Raw_honey_jar_ginger_63a42cf4.png",
       duration: "4:00",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Raw honey", "Fresh ginger", "Warm water", "Lemon juice"],
       steps: [
         "Grate 1 tsp fresh ginger",
@@ -93,6 +98,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_cucumber_slices_cooling_f0ef1ea8.png",
       duration: "2:45",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Fresh cucumber", "Rose water", "Cotton pads"],
       steps: [
         "Slice cucumber into thick rounds",
@@ -109,6 +115,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Apple_cider_vinegar_remedy_8b948f09.png",
       duration: "3:30",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Apple cider vinegar", "Warm water", "Honey (optional)"],
       steps: [
         "Mix 1-2 tbsp apple cider vinegar with warm water",
@@ -125,6 +132,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Lemon_baking_soda_whitening_04bc34a7.png",
       duration: "2:15",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Fresh lemon juice", "Baking soda", "Soft toothbrush", "Water"],
       steps: [
         "Mix equal parts lemon juice and baking soda",
@@ -141,6 +149,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Coconut_oil_cinnamon_diabetes_24d32a1a.png",
       duration: "4:45",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Virgin coconut oil", "Ceylon cinnamon", "Warm water"],
       steps: [
         "Take 1 tbsp virgin coconut oil daily",
@@ -157,6 +166,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Mint_ginger_nausea_remedy_dd650feb.png",
       duration: "3:45",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Fresh mint leaves", "Fresh ginger", "Hot water", "Lemon"],
       steps: [
         "Steep fresh mint leaves in hot water",
@@ -173,6 +183,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Green_tea_chamomile_stress_b57eeb53.png",
       duration: "4:20",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Chamomile flowers", "Green tea", "Honey", "Warm water"],
       steps: [
         "Combine equal parts chamomile and green tea",
@@ -189,6 +200,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Banana_oats_constipation_remedy_4c9229c2.png",
       duration: "5:00",
       difficulty: "Easy",
+      youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
       ingredients: ["Ripe bananas", "Rolled oats", "Water or milk", "Honey"],
       steps: [
         "Mash 1 ripe banana in a bowl",
@@ -284,19 +296,32 @@ export default function Videos() {
             </DialogHeader>
             
             <div className="space-y-6">
-                          <div className="aspect-video bg-muted rounded-lg flex items-center justify-center relative overflow-hidden">
-              <img 
-                src={selectedVideo.thumbnail} 
-                alt={selectedVideo.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <div className="text-center">
-                  <Play className="h-16 w-16 text-white mb-4 mx-auto" />
-                  <p className="text-lg font-semibold text-white">Video Coming Soon</p>
-                  <p className="text-white/80">Step-by-step preparation guide</p>
+                          <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              {selectedVideo.youtubeUrl ? (
+                <iframe
+                  src={selectedVideo.youtubeUrl}
+                  title={selectedVideo.title}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center relative">
+                  <img 
+                    src={selectedVideo.thumbnail} 
+                    alt={selectedVideo.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <div className="text-center">
+                      <Play className="h-16 w-16 text-white mb-4 mx-auto" />
+                      <p className="text-lg font-semibold text-white">Video Coming Soon</p>
+                      <p className="text-white/80">Step-by-step preparation guide</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
