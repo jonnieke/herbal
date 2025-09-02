@@ -245,7 +245,12 @@ export default function Community() {
 
   const handleLikePost = (postId: string) => {
     if (!currentUserEmail.trim()) {
-      alert("Please provide your email to like posts. You can set it in the comment section.");
+      const email = prompt("Please enter your email to like this post:");
+      if (!email || !email.trim()) {
+        return;
+      }
+      setCurrentUserEmail(email.trim());
+      likePostMutation.mutate({ postId, userEmail: email.trim() });
       return;
     }
     likePostMutation.mutate({ postId, userEmail: currentUserEmail });
