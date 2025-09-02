@@ -340,15 +340,17 @@ export default function Ailments() {
     const newSelectedAilment = selectedAilment === ailmentId ? null : ailmentId;
     setSelectedAilment(newSelectedAilment);
     
-    // If selecting an ailment (not deselecting), scroll to details after a short delay
-    if (newSelectedAilment && detailsRef.current) {
+    // If selecting an ailment (not deselecting), scroll to details after content renders
+    if (newSelectedAilment) {
       setTimeout(() => {
-        detailsRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start',
-          inline: 'nearest'
-        });
-      }, 100); // Small delay to allow the content to render first
+        const detailsElement = document.querySelector('[data-details-section="true"]');
+        if (detailsElement) {
+          detailsElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start'
+          });
+        }
+      }, 300); // Increased delay to ensure content is fully rendered
     }
   };
 
@@ -408,7 +410,7 @@ export default function Ailments() {
         </div>
 
         {selectedAilment && (
-          <div ref={detailsRef} className="mt-12">
+          <div ref={detailsRef} data-details-section="true" className="mt-12">
             {ailments.filter(ailment => ailment.id === selectedAilment).map((ailment) => {
               const IconComponent = ailment.icon;
               
