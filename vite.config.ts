@@ -30,6 +30,9 @@ export default defineConfig({
       strict: false,
       deny: ["**/.*"],
     },
+    hmr: {
+      clientPort: undefined,
+    },
   },
   esbuild: {
     loader: 'tsx',
