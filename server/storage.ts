@@ -852,24 +852,29 @@ export class MemStorage implements IStorage {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
-      const prompt = `You are a knowledgeable wellness assistant specializing in herbal medicine and natural health. 
-      Respond to this user question: "${message}"
-      
-      IMPORTANT: Keep your response SHORT and in BULLET POINTS format. Use this structure:
-      
-      • [Main herb/remedy recommendation]
-      • [How to use it - brief]
-      • [Key benefit - one line]
-      • [Safety note if needed - one line]
-      
-      Maximum 4-5 bullet points total. Be concise and practical.
-      Include 2-3 brief follow-up question suggestions.
-      
-      Format your response as JSON:
-      {
-        "response": "Your bullet point response here",
-        "suggestions": ["Follow-up question 1", "Follow-up question 2", "Follow-up question 3"]
-      }`;
+      const prompt = `You are a herbal wellness assistant. Answer in BULLET POINTS ONLY.
+
+User question: "${message}"
+
+STRICT FORMAT REQUIRED:
+• Recommend 1-2 specific herbs
+• How to use (tea, capsules, etc.)
+• Main benefit
+• Safety warning if any
+
+Keep each bullet point to ONE sentence maximum. No paragraphs or long explanations.
+
+Example response:
+• Try chamomile tea for sleep
+• Drink 1 cup before bedtime
+• Helps calm nerves naturally
+• Avoid if allergic to daisies
+
+Format as JSON:
+{
+  "response": "• Bullet point 1\n• Bullet point 2\n• Bullet point 3\n• Bullet point 4",
+  "suggestions": ["Quick question 1?", "Quick question 2?", "Quick question 3?"]
+}`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
