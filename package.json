@@ -9,6 +9,7 @@
     "build:client": "cd client && npm run build",
     "build:server": "tsc --project tsconfig.json",
     "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start:prod": "cross-env NODE_ENV=production node dist/index.js",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
