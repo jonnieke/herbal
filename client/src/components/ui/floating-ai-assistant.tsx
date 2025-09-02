@@ -24,8 +24,22 @@ export default function FloatingAIAssistant() {
   const [userInput, setUserInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const latestResponseRef = useRef<HTMLDivElement>(null);
 
-  // Removed auto-scroll to allow users to read responses without interruption
+  // Scroll to top of latest AI response for better reading experience
+  useEffect(() => {
+    if (!isTyping && latestResponseRef.current && chatMessages.length > 1) {
+      const latestMessage = chatMessages[chatMessages.length - 1];
+      if (latestMessage.type === 'assistant') {
+        setTimeout(() => {
+          latestResponseRef.current?.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }, 100);
+      }
+    }
+  }, [chatMessages, isTyping]);
 
 
   const handleSendMessage = async () => {
@@ -100,9 +114,10 @@ export default function FloatingAIAssistant() {
           <div className="flex-1 flex flex-col min-h-0">
             {/* Chat Messages */}
             <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-4 bg-muted/20 rounded-lg">
-              {chatMessages.map((message) => (
+              {chatMessages.map((message, index) => (
                 <div
                   key={message.id}
+                  ref={message.type === 'assistant' && index === chatMessages.length - 1 ? latestResponseRef : null}
                   className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
