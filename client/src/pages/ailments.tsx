@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertTriangle, Info, Heart, Droplet, HandHeart, Brain, Leaf, BookOpen, Lightbulb, Utensils } from "lucide-react";
+import { AlertTriangle, Info, Heart, Droplet, Brain, Leaf, BookOpen, Lightbulb, Utensils } from "lucide-react";
 
 export default function Ailments() {
   const [selectedAilment, setSelectedAilment] = useState<string | null>(null);
@@ -166,7 +166,7 @@ export default function Ailments() {
     },
     {
       id: "arthritis",
-      icon: HandHeart,
+      icon: Heart,
       title: "Arthritis",
       subtitle: "Joint Health Support",
       color: "text-green-600",
