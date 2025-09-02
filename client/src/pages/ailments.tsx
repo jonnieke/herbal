@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -336,22 +336,35 @@ export default function Ailments() {
     }
   };
 
+  // Handle scrolling when an ailment is selected
+  useEffect(() => {
+    if (selectedAilment && detailsRef.current) {
+      // Use requestAnimationFrame to ensure DOM has updated
+      const scrollToDetails = () => {
+        if (detailsRef.current) {
+          const yOffset = -20; // Small offset from top
+          const y = detailsRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          
+          window.scrollTo({
+            top: y,
+            behavior: 'smooth'
+          });
+        }
+      };
+      
+      // Use multiple timing strategies to ensure it works
+      requestAnimationFrame(() => {
+        requestAnimationFrame(scrollToDetails);
+      });
+      
+      // Fallback timeout
+      setTimeout(scrollToDetails, 100);
+    }
+  }, [selectedAilment]);
+
   const handleAilmentClick = (ailmentId: string) => {
     const newSelectedAilment = selectedAilment === ailmentId ? null : ailmentId;
     setSelectedAilment(newSelectedAilment);
-    
-    // If selecting an ailment (not deselecting), scroll to details after content renders
-    if (newSelectedAilment) {
-      setTimeout(() => {
-        const detailsElement = document.querySelector('[data-details-section="true"]');
-        if (detailsElement) {
-          detailsElement.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start'
-          });
-        }
-      }, 300); // Increased delay to ensure content is fully rendered
-    }
   };
 
   return (
