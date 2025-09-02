@@ -25,20 +25,23 @@ export default function FloatingAIAssistant() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const latestResponseRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Scroll to top of latest AI response for better reading experience
   useEffect(() => {
-    if (!isTyping && latestResponseRef.current && chatMessages.length > 1) {
+    if (!isTyping && latestResponseRef.current && scrollContainerRef.current && chatMessages.length > 1) {
       const latestMessage = chatMessages[chatMessages.length - 1];
       if (latestMessage.type === 'assistant') {
         setTimeout(() => {
-          // Scroll the response into view at the top
-          const scrollContainer = latestResponseRef.current?.closest('.overflow-y-auto');
-          if (scrollContainer && latestResponseRef.current) {
-            const responseElement = latestResponseRef.current;
-            scrollContainer.scrollTop = responseElement.offsetTop - 10;
+          if (scrollContainerRef.current && latestResponseRef.current) {
+            // Scroll to the AI response position
+            const responseTop = latestResponseRef.current.offsetTop - 20;
+            scrollContainerRef.current.scrollTo({
+              top: responseTop,
+              behavior: 'smooth'
+            });
           }
-        }, 200);
+        }, 300);
       }
     }
   }, [chatMessages, isTyping]);
@@ -115,7 +118,7 @@ export default function FloatingAIAssistant() {
           
           <div className="flex-1 flex flex-col min-h-0">
             {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-4 bg-muted/20 rounded-lg">
+            <div ref={scrollContainerRef} className="flex-1 overflow-y-auto space-y-4 mb-4 p-4 bg-muted/20 rounded-lg">
               {chatMessages.map((message, index) => (
                 <div
                   key={message.id}
