@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,6 +6,7 @@ import { AlertTriangle, Info, Heart, Droplet, Brain, Leaf, BookOpen, Lightbulb, 
 
 export default function Ailments() {
   const [selectedAilment, setSelectedAilment] = useState<string | null>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
 
   const ailments = [
     {
@@ -335,6 +336,22 @@ export default function Ailments() {
     }
   };
 
+  const handleAilmentClick = (ailmentId: string) => {
+    const newSelectedAilment = selectedAilment === ailmentId ? null : ailmentId;
+    setSelectedAilment(newSelectedAilment);
+    
+    // If selecting an ailment (not deselecting), scroll to details after a short delay
+    if (newSelectedAilment && detailsRef.current) {
+      setTimeout(() => {
+        detailsRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start',
+          inline: 'nearest'
+        });
+      }, 100); // Small delay to allow the content to render first
+    }
+  };
+
   return (
     <div className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
@@ -356,7 +373,7 @@ export default function Ailments() {
               <Card 
                 key={ailment.id} 
                 className={`p-6 shadow-lg border-2 cursor-pointer transition-all hover:shadow-xl ${ailment.borderColor} ${selectedAilment === ailment.id ? 'ring-2 ring-primary' : ''}`}
-                onClick={() => setSelectedAilment(selectedAilment === ailment.id ? null : ailment.id)}
+                onClick={() => handleAilmentClick(ailment.id)}
                 data-testid={`card-ailment-${ailment.id}`}
               >
                 <CardHeader className="pb-4">
@@ -391,7 +408,7 @@ export default function Ailments() {
         </div>
 
         {selectedAilment && (
-          <div className="mt-12">
+          <div ref={detailsRef} className="mt-12">
             {ailments.filter(ailment => ailment.id === selectedAilment).map((ailment) => {
               const IconComponent = ailment.icon;
               
