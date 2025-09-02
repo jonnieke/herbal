@@ -64,7 +64,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ 
           message: "Invalid form data", 
-          errors: error.errors 
+          errors: error.issues 
         });
       }
       res.status(500).json({ message: "Failed to submit contact form" });
@@ -106,7 +106,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ 
           message: "Invalid post data", 
-          errors: error.errors 
+          errors: error.issues 
         });
       }
       res.status(500).json({ message: "Failed to create post" });
@@ -134,7 +134,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         return res.status(400).json({ 
           message: "Invalid comment data", 
-          errors: error.errors 
+          errors: error.issues 
         });
       }
       res.status(500).json({ message: "Failed to create comment" });
