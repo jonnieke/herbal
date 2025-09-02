@@ -13,7 +13,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_turmeric_root_powder_2c202d36.png",
       duration: "4:20",
       difficulty: "Easy",
-      youtubeUrl: "https://www.youtube.com/embed/gaKd6C8ZOVs",
+      youtubeUrl: null,
       ingredients: ["Turmeric powder", "Warm milk or water", "Black pepper", "Honey"],
       steps: [
         "Mix 1 tsp turmeric powder with warm milk",
@@ -30,7 +30,7 @@ export default function Videos() {
       thumbnail: "/attached_assets/generated_images/Fresh_garlic_cloves_peeled_566ff3c0.png",
       duration: "3:45",
       difficulty: "Easy",
-      youtubeUrl: "https://www.youtube.com/embed/IOjFHZHlQdU",
+      youtubeUrl: null,
       ingredients: ["Fresh garlic cloves", "Warm water", "Lemon juice (optional)"],
       steps: [
         "Crush 2-3 fresh garlic cloves",
