@@ -443,13 +443,20 @@ export default function Home() {
             Watch simple herb preparations
           </h2>
           <div className="bg-card rounded-2xl p-8 shadow-lg border border-border">
-            <div className="aspect-video bg-gradient-to-br from-muted to-secondary/20 rounded-xl flex items-center justify-center" data-testid="video-placeholder-ginger-tea">
-              <div className="text-center">
-                <div className="bg-primary/90 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                  <Play className="h-10 w-10 text-primary-foreground" />
+            <div className="aspect-video rounded-xl overflow-hidden relative" data-testid="video-placeholder-ginger-tea">
+              <img 
+                src="/attached_assets/generated_images/Herbal_preparation_workspace_scene_4088b9aa.png"
+                alt="Traditional herbal preparation workspace with fresh herbs, mortar and pestle, and natural remedies"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="bg-primary/90 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                    <Play className="h-10 w-10 text-primary-foreground" />
+                  </div>
+                  <p className="text-white text-lg font-semibold mb-2 drop-shadow-lg">Herbal Preparation Guides</p>
+                  <p className="text-white/90 drop-shadow-md">Learn traditional methods for natural remedies</p>
                 </div>
-                <p className="text-foreground text-lg font-semibold mb-2">Coming Soon</p>
-                <p className="text-muted-foreground">Step-by-step herbal preparation guides</p>
               </div>
             </div>
           </div>
