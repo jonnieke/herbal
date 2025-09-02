@@ -103,94 +103,99 @@ export default function Videos() {
       ]
     },
     {
-      id: "neem-tea",
-      title: "How to Prepare Neem Tea",
-      description: "Learn the traditional method for brewing neem leaves into a beneficial tea.",
-      thumbnail: "/attached_assets/generated_images/Neem_tree_leaves_8f8d6bbc.png",
-      duration: "5:32",
+      id: "acv-acid-reflux",
+      title: "Apple Cider Vinegar for Acid Reflux",
+      description: "Natural remedy using apple cider vinegar to reduce heartburn and acid reflux symptoms.",
+      thumbnail: "/attached_assets/generated_images/Apple_cider_vinegar_remedy_8b948f09.png",
+      duration: "3:30",
       difficulty: "Easy",
-      ingredients: ["Neem leaves", "Water", "Honey (optional)"],
+      ingredients: ["Apple cider vinegar", "Warm water", "Honey (optional)"],
       steps: [
-        "Gather fresh neem leaves or use dried leaves",
-        "Boil 2 cups of water",
-        "Add 1-2 teaspoons of neem leaves",
-        "Simmer for 5-7 minutes",
-        "Strain and add honey if desired"
+        "Mix 1-2 tbsp apple cider vinegar with warm water",
+        "Add honey to taste if desired",
+        "Drink 20 minutes before meals",
+        "Start with small amounts to test tolerance",
+        "Use with the 'mother' for best results"
       ]
     },
     {
-      id: "moringa-powder",
-      title: "Moringa Powder Benefits & Uses",
-      description: "Discover the nutritional benefits and uses of moringa powder in daily meals.",
-      thumbnail: "/attached_assets/generated_images/Fresh_moringa_plant_leaves_f8771929.png",
-      duration: "4:15",
+      id: "lemon-teeth-whitening",
+      title: "Lemon & Baking Soda Teeth Whitening",
+      description: "Natural teeth whitening remedy using lemon juice and baking soda for brighter smiles.",
+      thumbnail: "/attached_assets/generated_images/Lemon_baking_soda_whitening_04bc34a7.png",
+      duration: "2:15",
       difficulty: "Easy",
-      ingredients: ["Moringa powder", "Smoothie ingredients", "Water or milk"],
+      ingredients: ["Fresh lemon juice", "Baking soda", "Soft toothbrush", "Water"],
       steps: [
-        "Start with 1/4 to 1/2 teaspoon of moringa powder",
-        "Add to smoothies, yogurt, or water",
-        "Mix well to avoid clumping",
-        "Store in airtight container away from light"
+        "Mix equal parts lemon juice and baking soda",
+        "Apply gently to teeth with soft brush",
+        "Leave for 1-2 minutes maximum",
+        "Rinse thoroughly with water",
+        "Use only once per week to protect enamel"
       ]
     },
     {
-      id: "ginger-tea",
-      title: "Making Ginger Tea",
-      description: "Step-by-step guide to preparing fresh ginger tea for digestion and immunity.",
-      thumbnail: "/attached_assets/generated_images/Fresh_ginger_root_pieces_b404e3ce.png",
-      duration: "6:45",
+      id: "coconut-oil-diabetes",
+      title: "Coconut Oil & Cinnamon for Blood Sugar",
+      description: "Natural remedy to help manage blood sugar levels using coconut oil and cinnamon.",
+      thumbnail: "/attached_assets/generated_images/Coconut_oil_cinnamon_diabetes_24d32a1a.png",
+      duration: "4:45",
       difficulty: "Easy",
-      ingredients: ["Fresh ginger root", "Lemon", "Honey", "Water"],
+      ingredients: ["Virgin coconut oil", "Ceylon cinnamon", "Warm water"],
       steps: [
-        "Slice 1 inch of fresh ginger",
-        "Boil 2 cups of water",
-        "Add ginger and simmer for 5 minutes",
-        "Strain and add lemon and honey"
+        "Take 1 tbsp virgin coconut oil daily",
+        "Add 1/2 tsp Ceylon cinnamon to meals",
+        "Mix cinnamon with warm water as tea",
+        "Take coconut oil before meals",
+        "Monitor blood sugar and consult doctor"
       ]
     },
     {
-      id: "chamomile-sleep",
-      title: "Chamomile Sleep Remedy",
-      description: "Create the perfect bedtime chamomile tea for better sleep quality.",
-      thumbnail: "/attached_assets/generated_images/Chamomile_flowers_blooming_fcc5a2fb.png",
-      duration: "3:20",
+      id: "mint-ginger-nausea",
+      title: "Mint & Ginger for Nausea Relief",
+      description: "Quick natural remedy to relieve nausea and morning sickness using mint and ginger.",
+      thumbnail: "/attached_assets/generated_images/Mint_ginger_nausea_remedy_dd650feb.png",
+      duration: "3:45",
       difficulty: "Easy",
-      ingredients: ["Chamomile flowers", "Hot water", "Honey (optional)"],
+      ingredients: ["Fresh mint leaves", "Fresh ginger", "Hot water", "Lemon"],
       steps: [
-        "Add 1-2 tsp chamomile to cup",
-        "Pour hot water (not boiling)",
-        "Steep for 5-7 minutes",
-        "Strain and add honey if desired"
+        "Steep fresh mint leaves in hot water",
+        "Add thin ginger slices to the tea",
+        "Let brew for 5-7 minutes",
+        "Add fresh lemon juice",
+        "Sip slowly when feeling nauseous"
       ]
     },
     {
-      id: "hibiscus-heart",
-      title: "Hibiscus for Heart Health",
-      description: "Learn to brew hibiscus tea and understand its cardiovascular benefits.",
-      thumbnail: "/attached_assets/generated_images/Red_hibiscus_flowers_47e0eec6.png",
-      duration: "7:10",
+      id: "chamomile-anxiety",
+      title: "Chamomile & Green Tea for Stress Relief",
+      description: "Calming herbal blend to reduce stress and anxiety naturally using chamomile and green tea.",
+      thumbnail: "/attached_assets/generated_images/Green_tea_chamomile_stress_b57eeb53.png",
+      duration: "4:20",
       difficulty: "Easy",
-      ingredients: ["Hibiscus flowers", "Water", "Honey", "Lemon", "Mint"],
+      ingredients: ["Chamomile flowers", "Green tea", "Honey", "Warm water"],
       steps: [
-        "Boil water and add hibiscus",
-        "Steep for 10-15 minutes",
-        "Strain and cool",
-        "Add honey, lemon, and mint"
+        "Combine equal parts chamomile and green tea",
+        "Steep in warm (not boiling) water",
+        "Brew for 3-5 minutes to avoid bitterness",
+        "Add honey for natural sweetness",
+        "Drink 2-3 times daily during stressful periods"
       ]
     },
     {
-      id: "sage-steam",
-      title: "African Sage Steam Therapy",
-      description: "Traditional steam therapy using African sage for respiratory wellness.",
-      thumbnail: "/attached_assets/generated_images/African_sage_plant_11f1d049.png",
-      duration: "8:30",
-      difficulty: "Medium",
-      ingredients: ["African sage leaves", "Hot water", "Towel", "Bowl"],
+      id: "banana-oats-constipation",
+      title: "Banana & Oats for Natural Constipation Relief",
+      description: "Gentle digestive remedy using bananas and oats to relieve constipation naturally.",
+      thumbnail: "/attached_assets/generated_images/Banana_oats_constipation_remedy_4c9229c2.png",
+      duration: "5:00",
+      difficulty: "Easy",
+      ingredients: ["Ripe bananas", "Rolled oats", "Water or milk", "Honey"],
       steps: [
-        "Boil water in a large bowl",
-        "Add fresh sage leaves",
-        "Cover head with towel",
-        "Inhale steam for 5-10 minutes"
+        "Mash 1 ripe banana in a bowl",
+        "Add 1/2 cup rolled oats",
+        "Pour warm water or milk to desired consistency",
+        "Add honey for sweetness",
+        "Eat first thing in the morning on empty stomach"
       ]
     }
   ];
