@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type Herb, type InsertHerb, type ContactMessage, type InsertContactMessage, type CommunityPost, type InsertCommunityPost, type CommunityComment, type InsertCommunityComment, type CommunityLike, type InsertCommunityLike } from "../shared/schema";
+import { type User, type InsertUser, type Herb, type InsertHerb, type ContactMessage, type InsertContactMessage, type CommunityPost, type InsertCommunityPost, type CommunityComment, type InsertCommunityComment, type CommunityLike, type InsertCommunityLike } from "../shared/schema.js";
 import { randomUUID } from "crypto";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -547,7 +547,7 @@ export class MemStorage implements IStorage {
         content: "I'm going through a particularly stressful time at work and looking for natural ways to manage stress. I've heard good things about adaptogenic herbs. What would you recommend for someone new to herbal remedies? I'm interested in something I can easily incorporate into my daily routine.",
         category: "question",
         tags: ["stress", "adaptogens", "mental-health", "beginner"],
-        imageUrl: null,
+        imageUrl: undefined,
       },
       {
         authorName: "Lisa Rodriguez",
