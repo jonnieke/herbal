@@ -4,7 +4,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize Gemini AI
 console.log('GEMINI_API_KEY in storage:', process.env.GEMINI_API_KEY ? 'Present' : 'Missing');
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "AIzaSyAsJW1alG2KuS8qEi3tTZn-KeaRNGf5Q0Y");
+if (!process.env.GEMINI_API_KEY) {
+  throw new Error('GEMINI_API_KEY environment variable is required');
+}
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
