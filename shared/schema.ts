@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm";
 import { pgTable, text, varchar, jsonb } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const users = pgTable("users", {
@@ -68,39 +67,54 @@ export const communityLikes = pgTable("community_likes", {
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+// Manual Zod schemas to replace drizzle-zod functionality
+export const insertUserSchema = z.object({
+  username: z.string(),
+  password: z.string(),
 });
 
-export const insertHerbSchema = createInsertSchema(herbs).omit({
-  id: true,
+export const insertHerbSchema = z.object({
+  name: z.string(),
+  localName: z.string().optional(),
+  emoji: z.string().optional(),
+  description: z.string(),
+  benefits: z.array(z.string()),
+  categories: z.array(z.string()),
+  preparationMethods: z.array(z.string()),
+  safetyInfo: z.string().optional(),
+  imageUrl: z.string().optional(),
+  isIndigenous: z.string().default("false"),
+  region: z.string().optional(),
 });
 
-export const insertContactMessageSchema = createInsertSchema(contactMessages).omit({
-  id: true,
-  createdAt: true,
+export const insertContactMessageSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  subject: z.string().optional(),
+  message: z.string(),
 });
 
-export const insertCommunityPostSchema = createInsertSchema(communityPosts).omit({
-  id: true,
-  likes: true,
-  views: true,
-  isApproved: true,
-  createdAt: true,
-  updatedAt: true,
+export const insertCommunityPostSchema = z.object({
+  authorName: z.string(),
+  authorEmail: z.string().email(),
+  title: z.string(),
+  content: z.string(),
+  category: z.string(),
+  tags: z.array(z.string()).default([]),
+  imageUrl: z.string().optional(),
 });
 
-export const insertCommunityCommentSchema = createInsertSchema(communityComments).omit({
-  id: true,
-  likes: true,
-  isApproved: true,
-  createdAt: true,
+export const insertCommunityCommentSchema = z.object({
+  postId: z.string(),
+  authorName: z.string(),
+  authorEmail: z.string().email(),
+  content: z.string(),
 });
 
-export const insertCommunityLikeSchema = createInsertSchema(communityLikes).omit({
-  id: true,
-  createdAt: true,
+export const insertCommunityLikeSchema = z.object({
+  postId: z.string().optional(),
+  commentId: z.string().optional(),
+  userEmail: z.string().email(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
