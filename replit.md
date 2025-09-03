@@ -67,3 +67,14 @@ Preferred communication style: Simple, everyday language.
 - **Replit**: Development and hosting platform with integrated deployment
 - **ESBuild**: Fast JavaScript bundler for server-side code compilation
 - **Express.js**: Web application framework for API server
+
+## Recent Changes
+
+### September 3, 2025 - Deployment Module Resolution Fix
+- **Issue**: Deployment was failing with "Cannot find module '/home/runner/workspace/dist/server/storage'" error
+- **Root Cause**: TypeScript configuration uses Node16 module resolution which requires explicit .js file extensions in import statements
+- **Fix Applied**: Updated import statements in `server/routes.ts` to include .js extensions:
+  - `import { storage } from "./storage";` → `import { storage } from "./storage.js";`
+  - `import { ...schema } from "../shared/schema";` → `import { ...schema } from "../shared/schema.js";`
+- **Verification**: TypeScript compilation now succeeds and all modules are properly compiled to dist directory
+- **Deployment Status**: Ready for production deployment with proper module resolution
