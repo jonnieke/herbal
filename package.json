@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
     "build": "npm run build:client && npm run build:server",
     "build:client": "cd client && npm run build",
-    "build:server": "mkdir -p dist && cp -r server shared dist/ && cp server/*.js dist/server/ && cp server/index.js dist/index.js && sed -i 's|from \"./routes\";|from \"./server/routes.js\";|g' dist/index.js && sed -i 's|from \"./vite\";|from \"./server/vite.js\";|g' dist/index.js && sed -i 's|from \"./storage\";|from \"./storage.js\";|g' dist/server/routes.js && sed -i 's|from \"../shared/schema\";|from \"../shared/schema.js\";|g' dist/server/routes.js && sed -i 's|from \"../vite.config\";|from \"../vite.config.js\";|g' dist/server/vite.js",
+    "build:server": "tsc --project tsconfig.server.json && cp -r server/*.js dist/server/ 2>/dev/null || true",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "start:prod": "cross-env NODE_ENV=production node dist/index.js",
     "type-check": "tsc --noEmit",
