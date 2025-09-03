@@ -570,7 +570,7 @@ export default function Community() {
                       className="flex items-center gap-2"
                     >
                       <MessageCircle className="h-4 w-4" />
-                      Comment
+                      {post.category === "question" ? "Answer" : "Comment"}
                     </Button>
                   </div>
                 </CardContent>
@@ -597,7 +597,11 @@ export default function Community() {
         <Dialog open={isCommentDialogOpen} onOpenChange={setIsCommentDialogOpen}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Comments on "{selectedPost?.title}"</DialogTitle>
+              <DialogTitle>
+                {selectedPost?.category === "question" 
+                  ? `Answers to "${selectedPost?.title}"` 
+                  : `Comments on "${selectedPost?.title}"`}
+              </DialogTitle>
             </DialogHeader>
             
             {selectedPost && (
@@ -620,7 +624,11 @@ export default function Community() {
 
                 {/* Comments */}
                 <div className="space-y-4">
-                  <h4 className="font-semibold">Comments ({comments.length})</h4>
+                  <h4 className="font-semibold">
+                    {selectedPost.category === "question" 
+                      ? `Answers (${comments.length})` 
+                      : `Comments (${comments.length})`}
+                  </h4>
                   {comments.map((comment) => (
                     <Card key={comment.id}>
                       <CardContent className="p-4">
@@ -671,9 +679,13 @@ export default function Community() {
                      </div>
                    </div>
                    <div>
-                     <label className="text-sm font-medium">Your Comment</label>
+                     <label className="text-sm font-medium">
+                      {selectedPost.category === "question" ? "Your Answer" : "Your Comment"}
+                    </label>
                      <Textarea
-                       placeholder="Share your thoughts, ask questions, or offer support..."
+                       placeholder={selectedPost.category === "question" 
+                        ? "Share your experience and advice to help answer this question..." 
+                        : "Share your thoughts, ask questions, or offer support..."}
                        value={commentForm.content}
                        onChange={(e) => setCommentForm({ ...commentForm, content: e.target.value })}
                        rows={3}
@@ -684,7 +696,7 @@ export default function Community() {
                      disabled={createCommentMutation.isPending || !commentForm.content || !commentForm.authorName || !commentForm.authorEmail}
                      className="w-full"
                    >
-                     {createCommentMutation.isPending ? "Posting..." : "Post Comment"}
+                     {createCommentMutation.isPending ? "Posting..." : (selectedPost.category === "question" ? "Post Answer" : "Post Comment")}
                    </Button>
                  </div>
               </div>
