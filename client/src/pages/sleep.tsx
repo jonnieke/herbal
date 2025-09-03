@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Moon, Bed, Star, BookOpen, Clock, Lightbulb } from "lucide-react";
 import HerbCard from "@/components/herbs/herb-card";
 import HerbDetailModal from "@/components/herbs/herb-detail-modal";
-import type { Herb } from "../../shared/schema";
+import type { Herb } from "@/shared/schema";
 
 export default function Sleep() {
   const [selectedHerb, setSelectedHerb] = useState<Herb | null>(null);

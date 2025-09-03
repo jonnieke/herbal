@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Globe, ShoppingBag, Leaf, Star, AlertTriangle } from "lucide-react";
-import type { Herb } from "../../shared/schema";
+import type { Herb } from "@/shared/schema";
 
 interface SourcingGuideProps {
   herb: Herb;

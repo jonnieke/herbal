@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Heart, Leaf, BookOpen, Lightbulb } from "lucide-react";
 import HerbCard from "@/components/herbs/herb-card";
 import HerbDetailModal from "@/components/herbs/herb-detail-modal";
-import type { Herb } from "../../shared/schema";
+import type { Herb } from "@/shared/schema";
 
 export default function MentalHealth() {
   const [selectedHerb, setSelectedHerb] = useState<Herb | null>(null);
