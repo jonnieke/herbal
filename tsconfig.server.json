@@ -3,11 +3,13 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "ES2020",
-    "module": "ESNext",
+    "module": "ESNext", 
     "moduleResolution": "node",
     "declaration": false,
     "sourceMap": false,
-    "removeComments": true
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": [
     "server/**/*",
