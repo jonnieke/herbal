@@ -9,7 +9,7 @@ packages = ["imagemagick"]
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
-run = ["node", "dist/server/index.js"]
+run = ["bash", "-c", "PORT=80 npm start"]
 
 [[ports]]
 localPort = 3001

@@ -25,13 +25,13 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    port: 5000,
+    port: 3000,
     fs: {
       strict: false,
       deny: ["**/.*"],
     },
     hmr: {
-      port: 5000,
+      port: 3001,
       clientPort: 443,
     },
   },

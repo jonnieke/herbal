@@ -26,7 +26,7 @@ export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: {
-      port: 5000,
+      port: 3001,
       clientPort: 443,
     },
     allowedHosts: true as const,
