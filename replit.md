@@ -70,11 +70,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### September 3, 2025 - Deployment Module Resolution Fix
-- **Issue**: Deployment was failing with "Cannot find module '/home/runner/workspace/dist/server/storage'" error
-- **Root Cause**: TypeScript configuration uses Node16 module resolution which requires explicit .js file extensions in import statements
-- **Fix Applied**: Updated import statements in `server/routes.ts` to include .js extensions:
-  - `import { storage } from "./storage";` → `import { storage } from "./storage.js";`
-  - `import { ...schema } from "../shared/schema";` → `import { ...schema } from "../shared/schema.js";`
-- **Verification**: TypeScript compilation now succeeds and all modules are properly compiled to dist directory
-- **Deployment Status**: Ready for production deployment with proper module resolution
+### September 4, 2025 - Complete Deployment Module Resolution Fix
+- **Issue**: Deployment was failing with "Cannot find module '/home/runner/workspace/dist/server/storage'" error during production build
+- **Root Cause**: Build script's sed command was not properly adding .js extensions to relative imports in compiled JavaScript files
+- **Fixes Applied**:
+  1. **Build Script**: Updated sed command in `package.json` to only add .js extensions to relative imports (starting with `.` or `..`), not to npm packages
+  2. **TypeScript Config**: Updated `tsconfig.server.json` to use `moduleResolution: "bundler"` for better ES module support
+  3. **Module Resolution**: Fixed import patterns to ensure proper ES module compatibility in production
+- **Technical Details**:
+  - Changed sed pattern from `/from \"\\([^\"]*\\)\\(\"\\)/` to `/from \"\\(\\.[^\"]*\\)\\(\"\\)/` to target only relative imports
+  - Npm packages like `express`, `http`, `zod` correctly remain without .js extensions
+  - Relative imports like `./storage.js`, `../shared/schema.js` now have proper .js extensions
+- **Verification**: Production server starts successfully, all modules load correctly, deployment configuration verified
+- **Deployment Status**: Fully resolved - ready for production deployment with proper ES module resolution

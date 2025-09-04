@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
     "build": "npm run build:client && npm run build:server",
     "build:client": "cd client && npm run build",
-    "build:server": "tsc --project tsconfig.server.json && cp -r server/*.js dist/server/ 2>/dev/null || true && find dist -name '*.js' -type f -exec sed -i 's/from \"\\([^\"]*\\)\"$/from \"\\1.js\"/g; s/from \"\\([^\"]*\\)\"\\s/from \"\\1.js\" /g' {} +",
+    "build:server": "tsc --project tsconfig.server.json && cp -r server/*.js dist/server/ 2>/dev/null || true && find dist -name '*.js' -type f -exec sed -i 's/from \"\\(\\.[^\"]*\\)\\(\"\\)/from \"\\1.js\\2/g' {} +",
     "start": "cross-env NODE_ENV=production node dist/server/index.js",
     "start:prod": "cross-env NODE_ENV=production node dist/server/index.js",
     "type-check": "tsc --noEmit",
