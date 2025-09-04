@@ -31,7 +31,8 @@ export default defineConfig({
       deny: ["**/.*"],
     },
     hmr: {
-      clientPort: undefined,
+      port: 5000,
+      clientPort: 443,
     },
   },
   esbuild: {
