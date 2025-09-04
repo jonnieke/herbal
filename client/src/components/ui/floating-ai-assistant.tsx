@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Bot, Send } from "lucide-react";
+import { getApiUrl } from "@/lib/api.js";
 
 interface ChatMessage {
   id: string;
@@ -64,7 +65,7 @@ export default function FloatingAIAssistant() {
 
     try {
       // Call the real Gemini API
-      const response = await fetch('/api/ai/wellness', {
+      const response = await fetch(getApiUrl('/api/ai/wellness'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

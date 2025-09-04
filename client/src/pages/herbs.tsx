@@ -5,6 +5,7 @@ import HerbSearch from "@/components/herbs/herb-search";
 import HerbDetailModal from "@/components/herbs/herb-detail-modal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getApiUrl } from "@/lib/api.js";
 import type { Herb } from "@/shared/schema";
 
 export default function Herbs() {
@@ -20,7 +21,7 @@ export default function Herbs() {
   const { data: searchResults = [], isLoading: isSearching } = useQuery<Herb[]>({
     queryKey: ["/api/herbs/search", searchQuery],
     queryFn: async () => {
-      const response = await fetch(`/api/herbs/search?q=${encodeURIComponent(searchQuery)}`);
+      const response = await fetch(getApiUrl(`/api/herbs/search?q=${encodeURIComponent(searchQuery)}`));
       if (!response.ok) {
         throw new Error('Failed to search herbs');
       }

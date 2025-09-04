@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Textarea } from "@/components/ui/textarea";
 import FeaturedHerb from "@/components/herbs/featured-herb";
 import { Brain, Zap, Moon, Scale, Heart, Search, Play, Bot, Send, X, Sparkles } from "lucide-react";
+import { getApiUrl } from "@/lib/api.js";
 import type { Herb } from "@/shared/schema";
 const familyImage = "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png";
 
@@ -100,7 +101,7 @@ export default function Home() {
 
     try {
       // Call the real Gemini API
-      const response = await fetch('/api/ai/wellness', {
+      const response = await fetch(getApiUrl('/api/ai/wellness'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

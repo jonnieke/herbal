@@ -22,6 +22,7 @@ import {
   User,
   ThumbsUp
 } from "lucide-react";
+import { getApiUrl } from "@/lib/api.js";
 import type { CommunityPost, CommunityComment } from "@/shared/schema";
 
 interface CreatePostForm {
@@ -137,7 +138,7 @@ export default function Community() {
   // Create post mutation
   const createPostMutation = useMutation({
     mutationFn: async (postData: CreatePostForm) => {
-      const response = await fetch("/api/community/posts", {
+      const response = await fetch(getApiUrl("/api/community/posts"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData),
@@ -163,7 +164,7 @@ export default function Community() {
   // Create comment mutation
   const createCommentMutation = useMutation({
     mutationFn: async (commentData: CreateCommentForm & { postId: string }) => {
-      const response = await fetch("/api/community/comments", {
+      const response = await fetch(getApiUrl("/api/community/comments"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(commentData),
@@ -185,7 +186,7 @@ export default function Community() {
   // Like post mutation
   const likePostMutation = useMutation({
     mutationFn: async ({ postId, userEmail }: { postId: string; userEmail: string }) => {
-      const response = await fetch(`/api/community/posts/${postId}/like`, {
+      const response = await fetch(getApiUrl(`/api/community/posts/${postId}/like`), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userEmail }),
