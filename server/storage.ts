@@ -4,10 +4,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize Gemini AI
 console.log('GEMINI_API_KEY in storage:', process.env.GEMINI_API_KEY ? 'Present' : 'Missing');
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error('GEMINI_API_KEY environment variable is required');
+let genAI: GoogleGenerativeAI | null = null;
+if (process.env.GEMINI_API_KEY) {
+  genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+} else {
+  console.warn('GEMINI_API_KEY not found. AI features will be disabled.');
 }
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -794,6 +796,20 @@ export class MemStorage implements IStorage {
   }
 
   async getAIHerbInfo(query: string): Promise<any> {
+    if (!genAI) {
+      return {
+        name: query,
+        description: "AI features are currently disabled. Please set GEMINI_API_KEY environment variable to enable AI assistance.",
+        benefits: ["Traditional wellness support"],
+        usage: "Consult with a healthcare provider",
+        dosage: "Follow recommended guidelines",
+        preparation: "Various methods available",
+        interactions: ["May interact with medications"],
+        warnings: ["Consult healthcare provider before use"],
+        category: "Wellness"
+      };
+    }
+    
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
@@ -852,6 +868,17 @@ export class MemStorage implements IStorage {
   }
 
   async getAIWellnessResponse(message: string): Promise<any> {
+    if (!genAI) {
+      return {
+        response: "AI features are currently disabled. Please set GEMINI_API_KEY environment variable to enable AI assistance.",
+        suggestions: [
+          "What specific symptoms are you experiencing?",
+          "Are you currently taking any medications?",
+          "What's your primary wellness goal?"
+        ]
+      };
+    }
+    
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       

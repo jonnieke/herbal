@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import path from "path";
 import { registerRoutes } from "./routes.js";
@@ -63,7 +64,7 @@ app.use((req, res, next) => {
   // ALWAYS serve the app on the port specified in the environment variable PORT
   // For autoscale deployment, use port 80. Default to 80 if not specified.
   // this serves both the API and the client.
-  const port = parseInt(process.env.PORT || '80', 10);
+  const port = parseInt(process.env.PORT || '3000', 10);
   server.listen({
     port,
     host: "0.0.0.0",

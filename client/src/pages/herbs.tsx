@@ -16,6 +16,13 @@ export default function Herbs() {
 
   const { data: allHerbs = [], isLoading } = useQuery<Herb[]>({
     queryKey: ["/api/herbs"],
+    queryFn: async () => {
+      const response = await fetch(getApiUrl('/api/herbs'));
+      if (!response.ok) {
+        throw new Error('Failed to fetch herbs');
+      }
+      return response.json();
+    },
   });
 
   const { data: searchResults = [], isLoading: isSearching } = useQuery<Herb[]>({
