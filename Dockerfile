@@ -6,10 +6,12 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-COPY client/package*.json ./client/
 
 # Install root dependencies
 RUN npm install
+
+# Copy client package files
+COPY client/package*.json ./client/
 
 # Install client dependencies
 RUN cd client && npm install
