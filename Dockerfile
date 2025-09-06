@@ -16,6 +16,10 @@ COPY client/package*.json ./client/
 # Install client dependencies
 RUN cd client && npm install
 
+# Fix rollup native module issue
+RUN rm -rf node_modules package-lock.json && npm install
+RUN cd client && rm -rf node_modules package-lock.json && npm install
+
 # Copy source code
 COPY . .
 
