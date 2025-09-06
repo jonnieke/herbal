@@ -8,8 +8,11 @@ WORKDIR /app
 COPY package*.json ./
 COPY client/package*.json ./client/
 
-# Install dependencies
-RUN npm ci
+# Install root dependencies
+RUN npm install
+
+# Install client dependencies
+RUN cd client && npm install
 
 # Copy source code
 COPY . .
