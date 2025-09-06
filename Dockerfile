@@ -16,18 +16,18 @@ COPY client/package*.json ./client/
 # Install client dependencies
 RUN cd client && npm install
 
-# Fix rollup native module issue
-RUN rm -rf node_modules package-lock.json && npm install
-RUN cd client && rm -rf node_modules package-lock.json && npm install
-
 # Copy source code
 COPY . .
 
 # Build the application
 RUN npm run build
 
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=3000
+
 # Expose port
 EXPOSE 3000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "dist/server/index.js"]
