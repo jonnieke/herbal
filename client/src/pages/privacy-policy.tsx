@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Eye, Lock, Users, Mail, Calendar, FileText } from "lucide-react";
+import { Shield, Eye, Lock, Users, Mail, FileText } from "lucide-react";
 
 export default function PrivacyPolicy() {
   const lastUpdated = "December 2024";

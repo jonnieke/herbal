@@ -42,7 +42,7 @@ export default function Navigation() {
   const filteredHerbs = herbs?.filter(herb =>
     herb.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     herb.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    herb.benefits.some(benefit => benefit.toLowerCase().includes(searchQuery.toLowerCase()))
+    herb.benefits.some((benefit: string) => benefit.toLowerCase().includes(searchQuery.toLowerCase()))
   ) || [];
 
   const navItems = [
@@ -52,6 +52,7 @@ export default function Navigation() {
     { path: "/ailments", label: "Ailments" },
     { path: "/videos", label: "Videos" },
     { path: "/community", label: "Community" },
+    { path: "/ai-wellness", label: "AI Wellness" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
   ];
@@ -114,7 +115,7 @@ export default function Navigation() {
                             <h3 className="font-semibold text-foreground truncate">{herb.name}</h3>
                             <p className="text-sm text-muted-foreground line-clamp-1">{herb.description}</p>
                             <div className="flex flex-wrap gap-1 mt-1">
-                              {herb.benefits.slice(0, 2).map((benefit, index) => (
+                              {herb.benefits.slice(0, 2).map((benefit: string, index: number) => (
                                 <Badge key={index} variant="secondary" className="text-xs">
                                   {benefit}
                                 </Badge>

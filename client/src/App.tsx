@@ -21,6 +21,7 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import SafetyGuidelines from "@/pages/safety-guidelines";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import AIWellness from "@/pages/ai-wellness";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -40,6 +41,7 @@ function Router() {
           <Route path="/ailments" component={Ailments} />
           <Route path="/videos" component={Videos} />
           <Route path="/community" component={Community} />
+          <Route path="/ai-wellness" component={AIWellness} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/safety-guidelines" component={SafetyGuidelines} />

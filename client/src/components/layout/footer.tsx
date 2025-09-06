@@ -1,8 +1,8 @@
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { Leaf } from "lucide-react";
 
 export default function Footer() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   const handleNavigation = (path: string) => {
     setLocation(path);
@@ -71,6 +71,15 @@ export default function Footer() {
                   data-testid="footer-link-community"
                 >
                   Community
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNavigation("/ai-wellness")}
+                  className="text-muted-foreground hover:text-primary transition-colors text-left w-full"
+                  data-testid="footer-link-ai-wellness"
+                >
+                  AI Wellness
                 </button>
               </li>
             </ul>

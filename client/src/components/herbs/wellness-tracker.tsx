@@ -155,7 +155,7 @@ export default function WellnessTracker({ herb }: WellnessTrackerProps) {
                     onChange={(e) => setNewEntry({...newEntry, method: e.target.value})}
                   >
                     <option value="">Select method</option>
-                    {herb.preparationMethods.map((method) => (
+                    {herb.preparationMethods.map((method: string) => (
                       <option key={method} value={method}>{method}</option>
                     ))}
                   </select>

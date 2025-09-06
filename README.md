@@ -190,3 +190,38 @@ For support, email support@herbalcarehub.com or create an issue in the repositor
 ---
 
 **HerbalCareHub** - Connecting traditional wisdom with modern wellness 🌿✨
+
+## 🤖 AI Features Setup
+
+### Gemini API Integration
+
+The application includes AI-powered features using Google's Gemini API:
+
+1. **Get Your API Key**:
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Create a new API key
+   - Copy the key to your clipboard
+
+2. **Configure Environment Variables**:
+   ```bash
+   # Create a .env file in the root directory
+   cp env.example .env
+   
+   # Edit .env and add your API key
+   GEMINI_API_KEY=your_actual_api_key_here
+   ```
+
+3. **AI Features Available**:
+   - **Smart Herb Search**: Search any herb and get comprehensive information
+   - **Wellness Assistant**: Chat with AI for personalized advice
+   - **Safety Warnings**: AI-generated safety information and contraindications
+
+### AI Capabilities
+
+- **Herb Information**: Benefits, usage, dosage, preparation methods
+- **Drug Interactions**: Important medication warnings
+- **Safety Guidelines**: Contraindications and precautions
+- **Personalized Advice**: Tailored wellness recommendations
+- **Follow-up Questions**: Intelligent conversation flow
+
+**Note**: AI responses are for educational purposes only and should not replace professional medical advice.

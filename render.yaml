@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: herbal-care-hub
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: GEMINI_API_KEY
+        sync: false
+    healthCheckPath: /
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=600
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /
+

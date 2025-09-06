@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertTriangle, Shield, Heart, BookOpen, Users, Phone } from "lucide-react";
+import { AlertTriangle, Shield, Heart, BookOpen, Phone } from "lucide-react";
 
 export default function SafetyGuidelines() {
   const safetyPrinciples = [
