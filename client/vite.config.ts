@@ -11,11 +11,8 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: path.resolve(__dirname, "..", "dist/public", "public"),
+    outDir: path.resolve(__dirname, "..", "dist", "public"),
     emptyOutDir: true,
   },
-  server: {
-    port: 5173,
-    host: true,
-  },
+  server: { port: 5173, host: true },
 });
