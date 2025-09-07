@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, Clock, Thermometer } from "lucide-react";
+import { getCdnUrl } from "@/lib/api.js";
 import type { Herb } from "@/shared/schema";
 import HerbRecipes from "./herb-recipes";
 import SourcingGuide from "./sourcing-guide";
@@ -127,6 +128,61 @@ const preparationGuides = {
     timing: "Immediate",
     temperature: "Room temperature",
     tips: "Extracts are highly concentrated. Start with lowest recommended dose."
+  },
+  "Raw consumption": {
+    steps: [
+      "Measure 1–2 teaspoons of chia seeds",
+      "Sprinkle over yogurt, oatmeal, or salads",
+      "Drink water alongside to aid hydration",
+      "Increase slowly as tolerated"
+    ],
+    timing: "Immediate",
+    temperature: "Room temperature",
+    tips: "Always consume with fluids to prevent throat or gut discomfort."
+  },
+  "Soaked in water": {
+    steps: [
+      "Combine 1 tablespoon chia with 4–6 tablespoons water",
+      "Stir and let sit 10–15 minutes until gel forms",
+      "Stir again to break clumps",
+      "Consume as is or mix into drinks"
+    ],
+    timing: "10–15 minutes",
+    temperature: "Room temperature",
+    tips: "Use a 1:4–1:6 chia-to-water ratio for drinkable gel; refrigerate up to 24 hours."
+  },
+  "Smoothies": {
+    steps: [
+      "Add 1–2 teaspoons chia seeds (whole or pre-soaked)",
+      "Blend with fruits, greens, and liquid of choice",
+      "Rest 2–3 minutes to slightly thicken (optional)",
+      "Serve immediately"
+    ],
+    timing: "2–5 minutes",
+    temperature: "Cold",
+    tips: "Pre-soak for a smoother texture. Start small to assess tolerance."
+  },
+  "Baking": {
+    steps: [
+      "Use ground chia to replace part of flour (up to 10–15%)",
+      "For egg substitute: 1 tbsp ground chia + 2.5 tbsp water, rest 5–10 min",
+      "Fold into batter or dough",
+      "Bake per recipe"
+    ],
+    timing: "Recipe-dependent",
+    temperature: "Oven temperature per recipe",
+    tips: "Ground chia improves binding and moisture; do not overdo to avoid dense bakes."
+  },
+  "Pudding": {
+    steps: [
+      "Mix 3 tbsp chia with 1 cup milk (dairy or plant)",
+      "Add sweetener/spices to taste",
+      "Stir thoroughly and rest 10 minutes, stir again",
+      "Refrigerate 2–4 hours or overnight until set"
+    ],
+    timing: "2–4 hours (chill)",
+    temperature: "Cold",
+    tips: "Whisk twice early to prevent clumps; adjust liquid for desired thickness."
   }
 };
 
@@ -158,7 +214,7 @@ export default function HerbDetailModal({ herb, isOpen, onClose }: HerbDetailMod
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <img 
-                src={herb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png"} 
+                src={getCdnUrl(herb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png")} 
                 alt={herb.name}
                 className="rounded-lg w-full h-64 object-cover"
               />

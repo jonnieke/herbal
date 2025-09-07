@@ -2,14 +2,24 @@ import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import path from "path";
 import { registerRoutes } from "./routes.js";
+import { storage } from "./storage.js";
 import { setupVite, serveStatic, log } from "./vite.js";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static assets
-app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets')));
+// Serve static assets with far-future cache
+app.use(
+  '/attached_assets',
+  express.static(path.join(process.cwd(), 'attached_assets'), {
+    maxAge: '30d',
+    immutable: true,
+    setHeaders: (res) => {
+      res.setHeader('Cache-Control', 'public, max-age=2592000, immutable');
+    },
+  }),
+);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -72,6 +82,21 @@ app.use((req, res, next) => {
     }, () => {
       log(`serving on port ${port}`);
     });
+
+    // Optionally generate herb images on startup using Gemini
+    const shouldGenerate = process.env.GENERATE_HERB_IMAGES_ON_START === 'true';
+    const force = process.env.GENERATE_HERB_IMAGES_FORCE === 'true';
+    if (shouldGenerate) {
+      setTimeout(async () => {
+        try {
+          // @ts-ignore extended method exists on storage
+          const summary = await storage.generateImagesForAllMissing(force);
+          log(`image-gen: generated=${summary.generated} skipped=${summary.skipped}`);
+        } catch (err) {
+          console.error('Failed to generate herb images:', err);
+        }
+      }, 1000);
+    }
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

@@ -1,6 +1,9 @@
+import 'dotenv/config';
 import { type User, type InsertUser, type Herb, type InsertHerb, type ContactMessage, type InsertContactMessage, type CommunityPost, type InsertCommunityPost, type CommunityComment, type InsertCommunityComment, type CommunityLike, type InsertCommunityLike } from "../shared/schema.js";
 import { randomUUID } from "crypto";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import fs from "fs/promises";
+import path from "path";
 
 // Initialize Gemini AI
 console.log('GEMINI_API_KEY in storage:', process.env.GEMINI_API_KEY ? 'Present' : 'Missing');
@@ -45,6 +48,8 @@ export interface IStorage {
   hasUserLikedComment(commentId: string, userEmail: string): Promise<boolean>;
   getAIHerbInfo(query: string): Promise<any>;
   getAIWellnessResponse(message: string): Promise<any>;
+  generateHerbImage(herbId: string): Promise<{ success: boolean; imageUrl?: string; message?: string }>;
+  generateImagesForAllMissing(): Promise<{ generated: number; skipped: number }>;
 }
 
 export class MemStorage implements IStorage {
@@ -420,6 +425,58 @@ export class MemStorage implements IStorage {
         imageUrl: "/attached_assets/generated_images/african pepper.jpg",
         isIndigenous: "true",
         region: "Africa"
+      },
+      {
+        name: "Roselle",
+        localName: "Hibiscus sabdariffa (Mchicha wa damu)",
+        emoji: "🌺",
+        description: "Calyces used to brew a tangy, vitamin C–rich tea supporting heart health.",
+        benefits: ["Antioxidant", "Supports heart health", "Refreshing hydration", "May help blood pressure"],
+        categories: ["General Wellness", "Weight Balance"],
+        preparationMethods: ["Tea", "Cold brew", "Extract"],
+        safetyInfo: "May lower blood pressure. Monitor if on antihypertensives.",
+        imageUrl: "/attached_assets/generated_images/roselle.svg",
+        isIndigenous: "true",
+        region: "Africa"
+      },
+      {
+        name: "Lemongrass",
+        localName: "Cymbopogon citratus (Mchai chai)",
+        emoji: "🌾",
+        description: "Citrusy grass traditionally used for calming, digestion, and cold relief.",
+        benefits: ["Digestive support", "Calming", "Respiratory comfort", "Aromatic"],
+        categories: ["General Wellness", "Mental Health"],
+        preparationMethods: ["Tea", "Fresh leaves", "Infusion"],
+        safetyInfo: "Generally safe; use moderate amounts during pregnancy.",
+        imageUrl: "/attached_assets/generated_images/lemongrass.svg",
+        isIndigenous: "true",
+        region: "Africa"
+      },
+      {
+        name: "Grewia tenax",
+        localName: "Gumura / Mkokola",
+        emoji: "🟤",
+        description: "Wild fruit used traditionally for energy, hydration, and micronutrients.",
+        benefits: ["Energy support", "Hydration", "Micronutrient source", "Traditional wellness"],
+        categories: ["Energy", "General Wellness"],
+        preparationMethods: ["Fresh fruit", "Juice", "Infusion"],
+        safetyInfo: "Generally safe as food; wash fruits thoroughly.",
+        imageUrl: "/attached_assets/generated_images/grewia_tenax.svg",
+        isIndigenous: "true",
+        region: "Africa"
+      },
+      {
+        name: "Sage",
+        localName: "Salvia officinalis",
+        emoji: "🌿",
+        description: "Aromatic leaf supporting focus, digestion, and throat comfort.",
+        benefits: ["Mental clarity", "Digestive support", "Throat comfort", "Antioxidant"],
+        categories: ["Mental Health", "General Wellness"],
+        preparationMethods: ["Tea", "Fresh leaves", "Tincture"],
+        safetyInfo: "Avoid excessive amounts; essential oil is potent.",
+        imageUrl: "/attached_assets/generated_images/sage.svg",
+        isIndigenous: "false",
+        region: "Global"
       }
     ];
 
@@ -495,6 +552,107 @@ export class MemStorage implements IStorage {
     };
     this.herbs.set(id, herb);
     return herb;
+  }
+
+  private slugifyFileBase(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  }
+
+  private async writeSvgToAssets(fileBase: string, svg: string): Promise<string> {
+    const rel = `/attached_assets/generated_images/${fileBase}.svg`;
+    const abs = `${process.cwd()}/attached_assets/generated_images/${fileBase}.svg`;
+    const fsMod = await import('fs/promises');
+    const pathMod = await import('path');
+    await fsMod.mkdir(pathMod.dirname(abs), { recursive: true });
+    await fsMod.writeFile(abs, svg, 'utf8');
+    return rel;
+  }
+
+  private buildSvgPrompt(herb: Herb): string {
+    const benefits = herb.benefits?.slice(0, 3).join(', ') || '';
+    return `Create a clean, modern, flat SVG illustration of the herb "${herb.name}".
+
+STRICT OUTPUT: Return ONLY valid SVG XML. Do NOT include markdown fences or any explanation.
+
+STYLE:
+- Soft gradient background
+- Minimal shapes implying the plant (leaves/fruit/flower), not photorealistic
+- Accessible color contrast
+- Include the herb name as vector text at the bottom
+
+DETAILS TO REFLECT:
+- Region: ${herb.region ?? ''}
+- IsIndigenous: ${herb.isIndigenous}
+- Benefits hint: ${benefits}
+
+REQUIREMENTS:
+- width=800 height=600 viewBox="0 0 800 600"
+- No external fonts; use generic font-family="sans-serif"
+- Keep file under 50KB if possible`;
+  }
+
+  private async delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private async generateSvgWithRetry(prompt: string, maxAttempts = 3): Promise<string> {
+    if (!genAI) throw new Error('GEMINI_API_KEY missing');
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+    let attempt = 0;
+    let lastError: any;
+    const backoffs = [500, 1500, 3000];
+    while (attempt < maxAttempts) {
+      try {
+        const result = await model.generateContent(prompt);
+        return result.response.text();
+      } catch (err: any) {
+        lastError = err;
+        const msg = String(err?.message || '').toLowerCase();
+        const retryable = msg.includes('429') || msg.includes('503') || msg.includes('unavailable') || msg.includes('quota') || msg.includes('rate');
+        if (!retryable || attempt === maxAttempts - 1) break;
+        await this.delay(backoffs[Math.min(attempt, backoffs.length - 1)]);
+        attempt++;
+      }
+    }
+    throw lastError || new Error('Failed to generate SVG');
+  }
+
+  async generateHerbImage(herbId: string): Promise<{ success: boolean; imageUrl?: string; message?: string }> {
+    const herb = this.herbs.get(herbId);
+    if (!herb) return { success: false, message: 'Herb not found' };
+    if (!genAI) return { success: false, message: 'GEMINI_API_KEY missing' };
+
+    try {
+      const svg = await this.generateSvgWithRetry(this.buildSvgPrompt(herb));
+      if (!svg || !svg.trim().startsWith('<svg')) {
+        return { success: false, message: 'Model did not return valid SVG' };
+      }
+      const fileBase = this.slugifyFileBase(herb.name);
+      const relUrl = await this.writeSvgToAssets(fileBase, svg);
+      const updated: Herb = { ...herb, imageUrl: relUrl };
+      this.herbs.set(herbId, updated);
+      return { success: true, imageUrl: relUrl };
+    } catch (e: any) {
+      return { success: false, message: e?.message || 'Failed to generate image' };
+    }
+  }
+
+  async generateImagesForAllMissing(force = false): Promise<{ generated: number; skipped: number }> {
+    let generated = 0;
+    let skipped = 0;
+    for (const herb of this.herbs.values()) {
+      if (!force && herb.imageUrl && /\.(png|jpg|jpeg|svg)$/i.test(herb.imageUrl)) {
+        skipped++;
+        continue;
+      }
+      const res = await this.generateHerbImage(herb.id);
+      if (res.success) generated++; else skipped++;
+      await this.delay(250);
+    }
+    return { generated, skipped };
   }
 
   async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {

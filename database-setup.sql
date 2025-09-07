@@ -1,5 +1,5 @@
 -- HerbalCareHub Database Setup
--- Run this script in your Railway PostgreSQL database
+-- Run this script in your PostgreSQL database
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

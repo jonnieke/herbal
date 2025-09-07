@@ -54,6 +54,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Generate image for a single herb (admin/dev utility)
+  app.post("/api/herbs/:id/generate-image", async (req, res) => {
+    try {
+      const { id } = req.params;
+      // @ts-ignore - extended method on storage
+      const result = await storage.generateHerbImage(id);
+      if (!result.success) {
+        return res.status(400).json(result);
+      }
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to generate herb image" });
+    }
+  });
+
+  // Generate images for all herbs missing images
+  app.post("/api/herbs/generate-images", async (req, res) => {
+    try {
+      const force = Boolean(req.query.force);
+      // @ts-ignore - extended method on storage
+      const summary = await storage.generateImagesForAllMissing(force);
+      res.json(summary);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to generate images" });
+    }
+  });
+
   // Submit contact form
   app.post("/api/contact", async (req, res) => {
     try {

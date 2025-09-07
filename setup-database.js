@@ -1,4 +1,4 @@
-// Database setup script for Railway
+// Database setup script
 // This script will create tables and insert sample data
 
 import { drizzle } from 'drizzle-orm/postgres-js';

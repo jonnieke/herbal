@@ -218,7 +218,7 @@ export default function SafetyGuidelines() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-blue-800">
               <Phone className="h-6 w-6" />
-              Emergency Information
+              Emergency Information (Kenya)
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -227,13 +227,16 @@ export default function SafetyGuidelines() {
                 <strong>In case of emergency or severe adverse reaction:</strong>
               </p>
               <ul className="space-y-2 ml-4">
-                <li>• Call emergency services (911) immediately</li>
-                <li>• Contact your local poison control center</li>
+                <li>• Call Kenyan emergency services: 999, 112, or 911</li>
+                <li>• Kenya Red Cross Emergency Hotline: 1199</li>
+                <li>• Childline Kenya (child protection): 116</li>
+                <li>• Gender-Based Violence Helpline: 1195</li>
+                <li>• Nairobi Fire Brigade: 020-2222181, 020-2344599</li>
                 <li>• Bring the herb or product with you to the emergency room</li>
                 <li>• Inform healthcare providers about all herbs and medications you're taking</li>
               </ul>
               <p className="mt-4">
-                <strong>Poison Control Hotline:</strong> 1-800-222-1222 (US)
+                <strong>Note:</strong> If outside Kenya, call your local emergency number. For poison exposure in Kenya, contact the nearest hospital immediately; a national poison control hotline is not currently available.
               </p>
             </div>
           </CardContent>

@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { Herb } from "@/shared/schema";
+import { getCdnUrl } from "@/lib/api.js";
 
 interface HerbCardProps {
   herb: Herb;
@@ -16,7 +17,7 @@ export default function HerbCard({ herb, onClick }: HerbCardProps) {
     >
       <div className="aspect-video overflow-hidden">
         <img 
-          src={herb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png"} 
+          src={getCdnUrl(herb.imageUrl || "/attached_assets/generated_images/Family_enjoying_herbal_tea_747c1dae.png")} 
           alt={herb.name}
           className="w-full h-full object-cover"
         />
